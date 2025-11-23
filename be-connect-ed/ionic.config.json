@@ -1,0 +1,7 @@
+{
+  "name": "BeConnectEd",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
