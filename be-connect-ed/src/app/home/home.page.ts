@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
    standalone: false,
 })
 export class HomePage implements OnInit {
+goHome() {
+throw new Error('Method not implemented.');
+}
 
   constructor() { }
 

@@ -52,20 +52,9 @@ ion-tab-bar {
   box-shadow: none !important;
   --ion-color-base: transparent !important;
 }
-html, body, ion-app {
-  background: linear-gradient(#babee0);
-  background-attachment: fixed;
-  background-size: cover;
-}
 
-.background {
-  position: absolute;
-  top: 3rem; left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('/assets/images/background3.png') no-repeat center/cover;
-  z-index: -1;
-}
+
+
 
 .header-md::after {
   background: transparent !important;
@@ -74,6 +63,13 @@ html, body, ion-app {
 .toolbar-background {
   background: transparent !important;
 }
+ion-content {
+  --padding-top: 0 !important;
+  --padding-bottom: 0 !important;
+  --padding-start: 0 !important;
+  --padding-end: 0 !important;
+}
+
 
 
 
