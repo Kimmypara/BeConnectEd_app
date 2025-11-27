@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-calendar',
@@ -6,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar.page.scss'],
   standalone: false,
 })
-export class CalendarPage implements OnInit {
+export class CalendarPage  {
+constructor(private menu: MenuController) {}
 
-  constructor() { }
+  openMenu() {
+    this.menu.open('start');
+}
 
-  ngOnInit() {
-  }
+
 
 }

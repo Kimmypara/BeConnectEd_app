@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,21 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
   standalone: false,
 })
+
+
+
 export class AppComponent {
-  constructor() {}
+
+  constructor(
+    private menu: MenuController,
+    private router: Router
+  ) {}
+
+  openMenu() {
+    this.menu.open();
+  }
+
+  openHomePage() {
+    this.router.navigate(['/home']);
+  }
 }
