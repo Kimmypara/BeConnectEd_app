@@ -32,7 +32,12 @@ ion-menu::part(container) {
 ion-item {
     --background: #d8eef7 !important;
     color: #172c42 !important;
-    border-bottom: 1px solid #c0dce8 !important; /* light border */
+    border-bottom: 1px solid #c0dce8 !important; 
+
+     &.item-selected,
+    &:active {
+      --color:#943da8c3 ;
+    }
 }
 
 .menu{
@@ -42,6 +47,8 @@ ion-item {
      width:3rem ;
      padding: 0%;
 }
+
+
 
 
 
