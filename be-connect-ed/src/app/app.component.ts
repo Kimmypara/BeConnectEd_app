@@ -12,6 +12,7 @@ import { MenuController } from '@ionic/angular';
 
 
 export class AppComponent {
+p: any;
 
   constructor(
     private menu: MenuController,
