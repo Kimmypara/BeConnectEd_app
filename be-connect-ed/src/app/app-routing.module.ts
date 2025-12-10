@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'enrolment',
     loadChildren: () => import('./enrolment/enrolment.module').then( m => m.EnrolmentPageModule)
+  },
+  {
+    path: 'chats',
+    loadChildren: () => import('./chats/chats.module').then( m => m.ChatsPageModule)
   }
 ];
 @NgModule({

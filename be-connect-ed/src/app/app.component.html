@@ -1,6 +1,38 @@
 <ion-app>
 
- 
+<!--Menu-->
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar  class="custom-menu-header">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+   <ion-content class="custom-menu-content ion-padding">
+      <ion-menu-toggle class="custom-menu-list">
+      <ion-item routerLink="/home">Home</ion-item>
+      <ion-item routerLink="/calendar">Plan & Schedule</ion-item>
+        <ion-item routerLink="/enrolment">Enrolment</ion-item>
+        <ion-item routerLink="/my-units">My Units</ion-item>
+        <ion-item routerLink="/notifications">Notifications</ion-item>
+        <ion-item routerLink="/chats">Chats</ion-item>
+    </ion-menu-toggle>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        
+        <ion-menu-button  class="menu" name="menu-sharp"></ion-menu-button>
+      </ion-buttons>
+      <ion-title></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> </ion-content>
+</div>
+
+ <div id="main-content">
 
   <div class="logo-container cursor: pointer" (click)="openHomePage()">
     
@@ -13,40 +45,11 @@
   <ion-router-outlet></ion-router-outlet>
 
   <app-bottom-nav></app-bottom-nav>
+
+</div>
+
+
+
 </ion-app>
 
 
-<!--Menu-->
-<ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar  class="custom-menu-header">
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-   <ion-content class="custom-menu-content ion-padding">
-    
-      <ion-menu-toggle class="custom-menu-list">
-      <ion-item routerLink="/home">Home</ion-item>
-      <ion-item routerLink="/calendar">Plan & Schedule</ion-item>
-        <ion-item routerLink="/enrolment">Enrolment</ion-item>
-        <ion-item routerLink="/my-units">My Units</ion-item>
-        <ion-item routerLink="/notifications">Notifications</ion-item>
-    </ion-menu-toggle>
-   
-  </ion-content>
-  
-</ion-menu>
-
-
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button class="menu" name="menu-sharp"></ion-menu-button>
-      </ion-buttons>
-      <ion-title></ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content class="ion-padding"> </ion-content>
-</div>

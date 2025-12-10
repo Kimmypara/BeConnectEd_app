@@ -8,6 +8,13 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BottomNavComponent } from "./bottom-nav/bottom-nav.component";
+import { MenuController } from '@ionic/angular';
+
+import { Component, inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { from, Subject } from 'rxjs';
+
 
 
 @NgModule({
@@ -16,4 +23,9 @@ import { BottomNavComponent } from "./bottom-nav/bottom-nav.component";
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}
+
+
+
+
