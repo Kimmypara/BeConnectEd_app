@@ -1,55 +1,68 @@
 <ion-app>
 
-<!--Menu-->
-<ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar  class="custom-menu-header">
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-   <ion-content class="custom-menu-content ion-padding">
-      <ion-menu-toggle class="custom-menu-list">
-      <ion-item routerLink="/home">Home</ion-item>
-      <ion-item routerLink="/calendar">Plan & Schedule</ion-item>
-        <ion-item routerLink="/enrolment">Enrolment</ion-item>
-        <ion-item routerLink="/my-units">My Units</ion-item>
-        <ion-item routerLink="/notifications">Notifications</ion-item>
-        <ion-item routerLink="/chats">Chats</ion-item>
-    </ion-menu-toggle>
-  </ion-content>
-</ion-menu>
+  <!-- LOGIN / AUTH PAGES -->
+  <ion-router-outlet *ngIf="hideChrome"></ion-router-outlet>
 
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        
-        <ion-menu-button  class="menu" name="menu-sharp"></ion-menu-button>
-      </ion-buttons>
-      <ion-title></ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding"> </ion-content>
-</div>
+  <!-- MAIN APP LAYOUT -->
+  <ng-container *ngIf="!hideChrome">
 
- <div id="main-content">
+    <!-- SIDE MENU -->
+    <ion-menu
+      menuId="mainMenu"
+      contentId="main-content"
+      side="start"
+    >
+      <ion-header>
+        <ion-toolbar class="custom-menu-header">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
 
-  <div class="logo-container cursor: pointer" (click)="openHomePage()">
-    
-  <img class="app-logo" src="assets/images/logo.png" alt="App Logo">
-</div>
+      <ion-content class="custom-menu-content ion-padding">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item routerLink="/home">Home</ion-item>
+          <ion-item routerLink="/calendar">Plan & Schedule</ion-item>
+          <ion-item routerLink="/enrolment">Enrolment</ion-item>
+          <ion-item routerLink="/my-units">My Units</ion-item>
+          <ion-item routerLink="/notifications">Notifications</ion-item>
+          <ion-item routerLink="/chats">Chats</ion-item>
+        </ion-menu-toggle>
+      </ion-content>
+    </ion-menu> 
+    <!-- MAIN PAGE -->
+    <div class="ion-page" id="main-content">
 
+      <ion-header>
+        <ion-toolbar class="toolbar-with-logo">
+          <ion-buttons slot="start">
+            <ion-menu-button menu="mainMenu"></ion-menu-button>
+          </ion-buttons>
 
+          <div class="logo-title">
+            <ion-router-link routerLink="/home">
+              <img
+                class="app-logo center-logo"
+                src="assets/images/logo.png"
+                alt="App Logo"
+              />
+            </ion-router-link>
+          </div>
+        </ion-toolbar>
+      </ion-header>
+
+      <!-- MAIN ROUTER OUTLET (ALWAYS PRESENT) -->
+      <ion-content class="ion-padding">
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <app-bottom-nav></app-bottom-nav>
+
+  </ng-container>
+
+  <!-- BACKGROUND -->
   <div class="background"></div>
-  
-  <ion-router-outlet></ion-router-outlet>
-
-  <app-bottom-nav></app-bottom-nav>
-
-</div>
-
-
 
 </ion-app>
-
-

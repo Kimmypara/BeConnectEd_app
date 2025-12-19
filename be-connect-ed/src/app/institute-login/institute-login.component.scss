@@ -1,0 +1,51 @@
+
+.login-page {
+  --background: #f2f2f2;
+}
+
+/* Container */
+.login-container {
+  min-height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  
+  gap: 10px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: 5rem;
+}
+
+.logo img {
+  width: 7rem;
+  height: auto;
+}
+
+/* Title */
+.title {
+  text-align: center;
+  font-weight: 700;
+  margin-top: 3rem;
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 1rem;
+   /* button background */
+  --color: #ffffff;                     
+}
+
+.buttons ion-button {
+   --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+  --border-width: 2px;
+  --border-radius: 6px;
+  height: 52px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}

@@ -36,6 +36,29 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+:root {
+	--ion-color-primary: #23323d;
+	--ion-color-primary-rgb: 35,50,61;
+	--ion-color-primary-contrast: #dcf1f8;
+	--ion-color-primary-contrast-rgb: 255,255,255;
+	--ion-color-primary-shade: #1a5b71;
+	--ion-color-primary-tint: #394750;
+
+	--ion-color-secondary: #1a5b71;
+	--ion-color-secondary-rgb: 26,91,113;
+	--ion-color-secondary-contrast: #ffffff;
+	--ion-color-secondary-contrast-rgb: 255,255,255;
+	--ion-color-secondary-shade: #175063;
+	--ion-color-secondary-tint: #316b7f;
+
+	--ion-color-tertiary: #943da8c3;
+	--ion-color-tertiary-rgb: 61,168,195;
+	--ion-color-tertiary-contrast: #000000;
+	--ion-color-tertiary-contrast-rgb: 0,0,0;
+	--ion-color-tertiary-shade: #3694ac;
+	--ion-color-tertiary-tint: #50b1c9;
+}
+
 ion-app,
 ion-content,
 ion-header,
@@ -63,6 +86,7 @@ ion-tab-bar {
   background-position: center;
   background-repeat: no-repeat;
   z-index: -3;
+  pointer-events: none;
 }
 
 .header-md::after {
