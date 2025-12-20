@@ -1,10 +1,11 @@
 
-
-.app-logo {
-  height: 3.0rem;
-  margin:3rem  auto; 
-  display: block;
+.logo {
+  width: 6rem;
+  top: 0rem;
+  margin: auto;
+  display: flex;
 }
+
 
 .icons {
   text-align: center;
@@ -17,7 +18,6 @@
 .icons:focus{
   color: #943da8c3
 }
-
 
 .nav-icons {
   position: fixed;
@@ -42,5 +42,4 @@
   font-size: .9rem;
   text-wrap: nowrap;
 }
-
 

@@ -1,16 +1,18 @@
 <ion-app>
 
   <!-- LOGIN / AUTH PAGES -->
-  <ion-router-outlet *ngIf="hideChrome"></ion-router-outlet>
+  <ion-router-outlet ></ion-router-outlet>
+  
 
   <!-- MAIN APP LAYOUT -->
-  <ng-container *ngIf="!hideChrome">
+  
 
     <!-- SIDE MENU -->
     <ion-menu
       menuId="mainMenu"
       contentId="main-content"
       side="start"
+      *ngIf="!hideChrome" 
     >
       <ion-header>
         <ion-toolbar class="custom-menu-header">
@@ -33,20 +35,12 @@
     <div class="ion-page" id="main-content">
 
       <ion-header>
-        <ion-toolbar class="toolbar-with-logo">
+        <ion-toolbar class="toolbar-with-logo menu">
           <ion-buttons slot="start">
             <ion-menu-button menu="mainMenu"></ion-menu-button>
           </ion-buttons>
 
-          <div class="logo-title">
-            <ion-router-link routerLink="/home">
-              <img
-                class="app-logo center-logo"
-                src="assets/images/logo.png"
-                alt="App Logo"
-              />
-            </ion-router-link>
-          </div>
+      
         </ion-toolbar>
       </ion-header>
 
@@ -58,9 +52,9 @@
     </div>
 
     <!-- BOTTOM NAV -->
-    <app-bottom-nav></app-bottom-nav>
+    <app-bottom-nav *ngIf="!hideChrome"></app-bottom-nav>
 
-  </ng-container>
+ 
 
   <!-- BACKGROUND -->
   <div class="background"></div>

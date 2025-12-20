@@ -1,19 +1,60 @@
-import { Component, OnInit } from '@angular/core';
-import { IonContent, IonText, IonButton } from "@ionic/angular/standalone";
+import { Component, inject, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms'
+import { AuthService } from '../services/auth';
 import { Router } from '@angular/router';
-import { NavController, IonicModule } from '@ionic/angular';
+
+
+
 
 @Component({
+  standalone: true,
   selector: 'app-institute-login',
   templateUrl: './institute-login.component.html',
   styleUrls: ['./institute-login.component.scss'],
-  standalone: true,
-  imports: [IonContent, IonicModule],
+  imports: [IonicModule, CommonModule, ReactiveFormsModule]
 })
-export class InstituteLoginComponent  implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {}
 
+
+
+export class InstituteLoginComponent {
+
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
+  });
+
+  
+ constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+  
+
+ 
+
+  onLogin() {
+    console.log('FORM SUBMITTED', this.loginForm.value);
+
+    if (this.loginForm.invalid) return;
+
+    const success = this.authService.login(
+      this.loginForm.value.email!,
+      this.loginForm.value.password!
+    );
+
+    if (success) {
+      this.router.navigate(['/home']);
+    }
+  }
 }
+
+  
+
+
+

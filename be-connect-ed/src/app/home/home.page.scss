@@ -1,9 +1,11 @@
 
-.app-logo {
-  height: 3.0rem;
-  margin:3rem  auto; 
-  display: block;
+.logo {
+  width: 6rem;
+  top: 0rem;
+  margin: auto;
+  display: flex;
 }
+
 
 .icons {
   text-align: center;
@@ -40,4 +42,39 @@
   font-size: .9rem;
   text-wrap: nowrap;
 }
+
+
+//Welcome Banner
+
+.welcome-text {
+  position: absolute;
+ margin: 6rem auto;
+  width: 100%;
+  text-align: center;
+  color: var(--ion-color-primary);
+}
+
+
+.welcome {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.greeting {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.name {
+  font-size: 1.4rem;
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.message {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
 

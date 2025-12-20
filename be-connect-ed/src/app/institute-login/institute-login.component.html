@@ -1,17 +1,28 @@
-<ion-content class="login-page">
 
-  <div class="login-container">
 
-    <!-- Logo -->
-    <div class="logo">
-      <img src="assets/images/logo.png" alt="Logo">
-    </div>
+<ion-img
+src="assets/images/logo.png"
+alt="Be connected logo"
+   class="logo"
+></ion-img>
 
-    <!-- Title -->
-    <ion-text color="primary">
-      <h2 class="title">Choose your Path</h2>
-    </ion-text>
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+  
+  
+    <ion-item lines="none" class="input-item">
+      <ion-input type="email" placeholder="E-mail" formControlName="email" required ></ion-input>
+    </ion-item>
 
-  </div>
+       <ion-item lines="none" class="input-item">
+        <ion-input type="password" placeholder="Password" formControlName="password" required></ion-input>
+      </ion-item>
 
-</ion-content>
+        <div class="forgot">
+        <ion-text color="primary">Forgot Password</ion-text>
+      </div>
+
+        <ion-button expand="block" fill="solid" class="buttons" type="submit">
+        Login
+        </ion-button>
+
+  </form>

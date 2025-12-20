@@ -10,11 +10,6 @@
   --min-height: 56px;   /* default Ionic toolbar height */
 }
 
-.app-logo {
-  height: 50px;
-  display: block;
- 
-}
 
 .center-logo {
   left: 50%;
@@ -58,10 +53,12 @@ ion-item {
 
 .menu{
      z-index: 4;
-     margin:3rem  .8rem; 
+     margin-top:2rem  ; 
+     margin-left: 2rem;
      color: #172c42;
      width:3rem ;
      padding: 0%;
+     
 }
 
 

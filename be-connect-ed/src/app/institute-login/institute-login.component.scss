@@ -16,15 +16,12 @@
 /* Logo */
 .logo {
   display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  margin-top: 5rem;
+ margin: 6.5rem auto;
+  width: 7rem;
+  top: 1rem;
 }
 
-.logo img {
-  width: 7rem;
-  height: auto;
-}
+
 
 /* Title */
 .title {
@@ -35,9 +32,9 @@
 
 /* Buttons */
 .buttons {
-  margin-top: 1rem;
-   /* button background */
-  --color: #ffffff;                     
+   --color: var(--ion-color-primary-contrast);
+   height: 52px;   
+    margin: 1rem;                  
 }
 
 .buttons ion-button {
@@ -49,3 +46,55 @@
   font-weight: 500;
   margin-bottom: 12px;
 }
+:host {
+  pointer-events: auto;
+}
+
+ion-page {
+  pointer-events: auto;
+}
+
+ion-content {
+  pointer-events: auto;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 26rem;
+}
+
+/* Inputs */
+.input-item {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+  padding-inline: 8px;
+    --border-width: 2px;
+  --border-radius: 6px;
+  height: 52px;
+  margin: .5rem;
+}
+
+ion-input {
+  --padding-start: 8px;
+  --padding-end: 8px;
+}
+
+/* Forgot password */
+.forgot {
+  text-align: right;
+  font-size: 0.85rem;
+  margin: .2rem 1rem ;
+}
+
+/* Login button */
+.login-btn {
+  margin-top: 16px;
+  height: 48px;
+  --background: #000;
+  --color: #fff;
+  --border-radius: 4px;
+  font-weight: 500;
+}
+
