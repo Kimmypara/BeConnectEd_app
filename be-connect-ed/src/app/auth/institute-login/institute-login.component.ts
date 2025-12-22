@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'
-import { AuthService } from '../services/auth';
+import { AuthService } from '../../services/auth';
 import { Router } from '@angular/router';
 
 
@@ -16,10 +16,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./institute-login.component.scss'],
   imports: [IonicModule, CommonModule, ReactiveFormsModule]
 })
-
-
-
-
 
 export class InstituteLoginComponent {
 

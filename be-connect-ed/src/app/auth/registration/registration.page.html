@@ -1,0 +1,43 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item lines="none" *ngIf="email!= ''">
+    <ion-text class="mainColor">Hello {{name}} {{surname}} ({{email}})</ion-text>
+  </ion-item>
+
+  <form (ngSubmit)="save();" [formGroup]="fg">
+    <ion-list>
+      <ion-item>
+        <ion-input label="email" placeholder="email" formControlName="email" type="email" id="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="First name" placeholder="Joe" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Last name" placeholder="Borg" formControlName="surname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-select label="Theme" formControlName="theme">
+          <ion-select-option *ngFor="let t of themes" value="{{t.id}}">{{t.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-button type="submit">Save</ion-button>
+  </form>
+
+
+
+
+</ion-content>

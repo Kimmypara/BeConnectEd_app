@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomePage {
 
   greeting = '';
-  userName = 'Name of Student';
+  name = 'Name of Student';
   positiveMessage = '';
 
   private messages: string[] = [

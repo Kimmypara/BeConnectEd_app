@@ -8,18 +8,18 @@ const routes: Routes = [
   {
     path: 'auth/login',
     loadComponent: () =>
-      import('./login/login.page').then(m => m.LoginPage)
+      import('./auth/login/login.page').then(m => m.LoginPage)
   },
 {
   path: 'auth/institute-login',
   loadComponent: () =>
-    import('./institute-login/institute-login.component')
+    import('./auth/institute-login/institute-login.component')
       .then(m => m.InstituteLoginComponent)
 },
 {
   path: 'auth/independent-login',
   loadComponent: () =>
-    import('./independent-login/independent-login.component')
+    import('./auth/independent-login/independent-login.component')
       .then(m => m.IndependentLoginComponent)
 },
 
@@ -54,7 +54,18 @@ const routes: Routes = [
       import('./chats/chats.module').then(m => m.ChatsPageModule)
   },
 
-  { path: '**', redirectTo: 'auth/login' }
+ 
+  {
+    path: 'auth/registration',
+    loadChildren: () => import('./auth/registration/registration.module').then( m => m.RegistrationPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+
+   { path: '**', redirectTo: 'auth/login' },
+
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { importProvidersFrom, NgModule } from '@angular/core';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -15,22 +15,29 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { from, Subject } from 'rxjs';
 
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(IonicStorageModule.forRoot()),
+  ],
+});
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot({
-      animated: false
-    }), AppRoutingModule, BottomNavComponent],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
+    BottomNavComponent
+],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
-
-
- 
 })
-
-
 export class AppModule {}
+
+
+
 
 
 
