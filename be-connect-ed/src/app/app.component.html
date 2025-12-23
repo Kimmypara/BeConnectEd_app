@@ -50,7 +50,10 @@
     </div>
 
     <!-- BOTTOM NAV -->
-    <app-bottom-nav *ngIf="!hideChrome"></app-bottom-nav>
+   
+<app-bottom-nav *ngIf="!hideChrome && role === 'student'"></app-bottom-nav>
+<!--<app-parent-bottom-nav  *ngIf="!hideChrome && role === 'parent'"></app-parent-bottom-nav>-->
+<app-teachers-bottom-nav *ngIf="!hideChrome && role === 'teacher'"></app-teachers-bottom-nav>
 
  
 

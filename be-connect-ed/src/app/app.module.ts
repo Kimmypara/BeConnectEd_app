@@ -15,6 +15,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { from, Subject } from 'rxjs';
+import { TeachersBottomNavComponent } from "./teachers/teachers-bottom-nav/teachers-bottom-nav.component";
 
 
 
@@ -26,7 +27,8 @@ import { from, Subject } from 'rxjs';
     IonicModule.forRoot(),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
-    BottomNavComponent
+    BottomNavComponent,
+    TeachersBottomNavComponent
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

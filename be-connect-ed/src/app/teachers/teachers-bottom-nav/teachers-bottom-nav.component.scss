@@ -1,0 +1,54 @@
+.icons {
+  text-align: center;
+  color: #172c42;
+  display: flex;
+  flex-direction: column;
+  align-items: center;         
+}
+
+.icons:focus{
+  color: #943da8c3;
+}
+
+.icons:hover{
+  cursor: pointer;
+  color: #943da8c3;
+}
+
+.icons.active {
+  color:  #943da8c3;
+}
+
+.icons.active ion-icon {
+  color: #943da8c3;
+}
+
+.icons.active span {
+  font-weight: 500;
+}
+
+.nav-icons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: transparent;
+  z-index: 0;  
+   margin-bottom: .7rem;          
+}
+
+.icons ion-icon {
+  font-size: 1.5rem;
+  margin-bottom: 3px;
+}
+
+.icons span {
+  font-size: .6rem;
+  text-wrap: nowrap;
+}
+
+

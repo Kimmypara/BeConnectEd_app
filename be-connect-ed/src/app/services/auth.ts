@@ -32,9 +32,7 @@ export class AuthService {
     return { ok: true };
   }
 
-  
-
-  // Login and set current user
+   // Login and set current user
   login(email: string, password: string): { ok: boolean; user?: AppUser } {
     const users = this.getUsers();
     const found = users.find(
@@ -51,12 +49,12 @@ export class AuthService {
     return raw ? (JSON.parse(raw) as AppUser) : null;
   }
 
-  logout(): void {
-    localStorage.removeItem(this.CURRENT_KEY);
-  }
-
   private getUsers(): AppUser[] {
     const raw = localStorage.getItem(this.USERS_KEY);
     return raw ? (JSON.parse(raw) as AppUser[]) : [];
   }
 }
+  
+
+ 
+

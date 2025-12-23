@@ -32,9 +32,8 @@ export class InstituteLoginComponent {
   ) {}
   
 
- 
 
-  onLogin() {
+ onLogin() {
   console.log('FORM SUBMITTED', this.loginForm.value);
 
   if (this.loginForm.invalid) return;
@@ -50,12 +49,17 @@ export class InstituteLoginComponent {
   }
 
   const role = result.user!.role;
-// institute role target
-   if (role === 'student') this.router.navigate(['/home']);
-  else if (role === 'teacher') this.router.navigate(['/teacher-home']);
-  else if (role === 'parent') this.router.navigate(['/parent-home']);
+
+  if (role === 'teacher') {
+    this.router.navigate(['/teacher-home']);
+  } else if (role === 'parent') {
+    this.router.navigate(['/parent-home']); // only if you create this route
+  } else {
+    // student (default)
+    this.router.navigate(['/student/home']);
+  }
 }
-  
+
 }
 
 

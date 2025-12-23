@@ -13,9 +13,11 @@ type MenuItem = { title: string; url: string };
    standalone: false,
 })
 
-export class AppComponent {
+
+
+  export class AppComponent {
   hideChrome = false;
-  user: AppUser | null = null;
+  role: 'student' | 'parent' | 'teacher' | '' = '';
 
   // 3 menus
   studentMenu: MenuItem[] = [
@@ -29,36 +31,36 @@ export class AppComponent {
 ];
 
 teacherMenu = [
-  { title: 'Home', url: '/teacher/home' },
-  { title: 'Plan & Schedule', url: 'teachers/teacher-calendar' },
-  { title: 'Enrolment', url: 'teachers/teacher-enrolment' }, 
-  { title: 'Teaching Units', url: 'teachers/teaching-units' },     
-  { title: 'Notifications', url: 'teachers/teacher-notifications' },     
-  { title: 'Chats', url: 'teachers/teacher-chats' },     
-  { title: 'Profile', url: 'teachers/teacher-profile' },    
+  { title: 'Home', url: '/teacher-home' },
+  { title: 'Plan & Schedule', url: '/teacher-calendar' },
+  { title: 'Enrolment', url: '/teacher-enrolment' }, 
+  { title: 'Teaching Units', url: '/teaching-units' },     
+  { title: 'Notifications', url: '/teacher-notifications' },     
+  { title: 'Chats', url: '/teacher-chats' },     
+  { title: 'Profile', url: '/teacher-profile' },    
 ];
 
 constructor(private router: Router, private auth: AuthService) {
-    // Hide menu + bottom nav on auth pages
-    this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe(() => {
-        const url = this.router.url;
-        this.hideChrome = url.startsWith('/auth');
-        this.user = this.auth.getCurrentUser();
-      });
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      const url = this.router.url;
+      this.hideChrome = url.startsWith('/auth');
+
+      const u = this.auth.getCurrentUser();
+      this.role = (u?.role as any) || '';
+    });
   }
 
-  get menuItems(): MenuItem[] {
-    const role = this.user?.role;
+get menuItems(): MenuItem[] {
+  if (this.role === 'student') return this.studentMenu;
+  if (this.role === 'teacher') return this.teacherMenu;
+  //if (this.role === 'parent') return this.parentMenu; 
 
-    if (role === 'student') return this.studentMenu;
-    if (role === 'teacher') return this.teacherMenu;
-
-    // default student
-    return this.studentMenu;
-  }
+  return this.studentMenu; 
 }
+  }
+
+
+
 
 
 

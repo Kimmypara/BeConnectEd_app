@@ -40,22 +40,30 @@ onLogin() {
     return;
   }
 
+
   const email = this.loginForm.value.email ?? '';
   const password = this.loginForm.value.password ?? '';
 
-  const result = this.authService.login(email, password);
+const result = this.authService.login(email, password);
 
-  if (!result.ok) {
-    alert('Invalid email or password');
-    return;
-  }
+if (!result.ok) {
+  alert('Invalid email or password');
+  return;
+}
 
-  const role = result.user!.role;
+const role = result.user!.role;
 
-  if (role === 'student') this.router.navigate(['/home']);
-  else if (role === 'teacher') this.router.navigate(['/teacher-home']);
-  else if (role === 'parent') this.router.navigate(['/parent-home']);
+if (role === 'teacher') {
+  this.navCtrl.navigateRoot('/teacher-home');
+} else if (role === 'parent') {
+  this.navCtrl.navigateRoot('/parent-home'); // (you don't have parent routes yet)
+} else {
+  this.navCtrl.navigateRoot('/student/home'); // ✅ student
+}
+
+}
+
+}
   
-}
 
-}
+

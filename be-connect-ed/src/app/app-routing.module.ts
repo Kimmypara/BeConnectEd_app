@@ -76,12 +76,12 @@ const routes: Routes = [
     path: 'teacher-chats',
     loadChildren: () => import('./teachers/teacher-chats/teacher-chats.module').then( m => m.TeacherChatsPageModule)
   },
-{ path: '**', redirectTo: 'auth/login' },
+
   {
     path: 'teacher-profile',
     loadChildren: () => import('./teachers/teacher-profile/teacher-profile.module').then( m => m.TeacherProfilePageModule)
   },
-
+{ path: '**', redirectTo: 'auth/login' },
 
 ];
 

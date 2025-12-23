@@ -25,7 +25,7 @@ ion-menu::part(backdrop) {
 
 ion-menu::part(container) {
   border-radius: 0 20px 20px 0;
-  background-color: #dcf1f8;
+ --background: #dcf1f8 ;
   box-shadow: 4px 0px 4px rgba(4, 4, 4, 0.18);
   
 }
