@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from "@ionic/angular";
 import { IonIcon } from "@ionic/angular/standalone";
-import { AppRoutingModule } from "../app-routing.module";
+import { AppRoutingModule } from "../../app-routing.module";
 
 @Component({
 selector: 'app-bottom-nav',

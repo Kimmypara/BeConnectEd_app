@@ -5,33 +5,30 @@
   
 
   <!-- MAIN APP LAYOUT -->
+  <ion-menu
+  menuId="mainMenu"
+  contentId="main-content"
+  side="start"
+  *ngIf="!hideChrome"
+
   
+>
+  <ion-header>
+    <ion-toolbar class="custom-menu-header">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <!-- SIDE MENU -->
-    <ion-menu
-      menuId="mainMenu"
-      contentId="main-content"
-      side="start"
-      *ngIf="!hideChrome" 
-    >
-      <ion-header>
-        <ion-toolbar class="custom-menu-header">
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
+  <ion-content class="custom-menu-content ion-padding">
+    <ion-menu-toggle auto-hide="true">
+      <ion-item *ngFor="let item of menuItems" [routerLink]="item.url">
+        {{ item.title }}
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-content>
+</ion-menu>
 
-      <ion-content class="custom-menu-content ion-padding">
-        <ion-menu-toggle auto-hide="true">
-          <ion-item routerLink="/home">Home</ion-item>
-          <ion-item routerLink="/calendar">Plan & Schedule</ion-item>
-          <ion-item routerLink="/enrolment">Enrolment</ion-item>
-          <ion-item routerLink="/my-units">My Units</ion-item>
-          <ion-item routerLink="/notifications">Notifications</ion-item>
-          <ion-item routerLink="/chats">Chats</ion-item>
-          <ion-item routerLink="/profile">Profile</ion-item>
-        </ion-menu-toggle>
-      </ion-content>
-    </ion-menu> 
+   
     <!-- MAIN PAGE -->
     <div class="ion-page" id="main-content">
 
@@ -61,3 +58,7 @@
   <div class="background"></div>
 
 </ion-app>
+
+
+
+

@@ -35,22 +35,27 @@ export class InstituteLoginComponent {
  
 
   onLogin() {
-    console.log('FORM SUBMITTED', this.loginForm.value);
+  console.log('FORM SUBMITTED', this.loginForm.value);
 
-    if (this.loginForm.invalid) return;
+  if (this.loginForm.invalid) return;
 
-    const success = this.authService.login(
-      this.loginForm.value.email!,
-      this.loginForm.value.password!
-    );
+  const email = this.loginForm.value.email ?? '';
+  const password = this.loginForm.value.password ?? '';
 
-    if (success) {
-      this.router.navigate(['/home']);
-    }
+  const result = this.authService.login(email, password);
+
+  if (!result.ok) {
+    alert('Invalid email or password');
+    return;
   }
+
+  const role = result.user!.role;
+// institute role target
+   if (role === 'student') this.router.navigate(['/home']);
+  else if (role === 'teacher') this.router.navigate(['/teacher-home']);
+  else if (role === 'parent') this.router.navigate(['/parent-home']);
 }
-
   
-
+}
 
 

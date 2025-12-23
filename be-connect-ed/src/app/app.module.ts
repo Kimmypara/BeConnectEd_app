@@ -7,19 +7,16 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BottomNavComponent } from "./bottom-nav/bottom-nav.component";
+import { BottomNavComponent } from "./students/bottom-nav/bottom-nav.component";
 import { MenuController } from '@ionic/angular';
+
 
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { from, Subject } from 'rxjs';
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    importProvidersFrom(IonicStorageModule.forRoot()),
-  ],
-});
+
 
 
 @NgModule({
@@ -35,6 +32,12 @@ bootstrapApplication(AppComponent, {
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+
+
+
+
+
 
 
 

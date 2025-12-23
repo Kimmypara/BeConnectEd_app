@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 
+export type UserRole = 'student' | 'teacher' | 'parent' ;
+
+
 export interface AppUser {
   email: string;
   password: string;     // ( later hash on backend)
   name: string;
   surname: string;
+   role: UserRole;
 }
 
 @Injectable({
@@ -31,25 +35,24 @@ export class AuthService {
   
 
   // Login and set current user
-  login(email: string, password: string): boolean {
+  login(email: string, password: string): { ok: boolean; user?: AppUser } {
     const users = this.getUsers();
     const found = users.find(
       u => u.email.toLowerCase() === email.toLowerCase() && u.password === password
     );
-
-    if (!found) return false;
+    if (!found) return { ok: false };
 
     localStorage.setItem(this.CURRENT_KEY, JSON.stringify(found));
-    return true;
-  }
-
-  logout(): void {
-    localStorage.removeItem(this.CURRENT_KEY);
+    return { ok: true, user: found };
   }
 
   getCurrentUser(): AppUser | null {
     const raw = localStorage.getItem(this.CURRENT_KEY);
     return raw ? (JSON.parse(raw) as AppUser) : null;
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.CURRENT_KEY);
   }
 
   private getUsers(): AppUser[] {

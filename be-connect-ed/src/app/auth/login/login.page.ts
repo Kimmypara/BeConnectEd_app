@@ -34,21 +34,28 @@ export class LoginPage {
     this.navCtrl.navigateForward('/auth/independent-login', { animated: false });
   }
 
-  onLogin() {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
-
-    const email = this.loginForm.value.email ?? '';
-    const password = this.loginForm.value.password ?? '';
-
-    const success = this.authService.login(email, password);
-
-    if (success) {
-      this.router.navigate(['/home']);
-    } else {
-      alert('Invalid email or password');
-    }
+onLogin() {
+  if (this.loginForm.invalid) {
+    this.loginForm.markAllAsTouched();
+    return;
   }
+
+  const email = this.loginForm.value.email ?? '';
+  const password = this.loginForm.value.password ?? '';
+
+  const result = this.authService.login(email, password);
+
+  if (!result.ok) {
+    alert('Invalid email or password');
+    return;
+  }
+
+  const role = result.user!.role;
+
+  if (role === 'student') this.router.navigate(['/home']);
+  else if (role === 'teacher') this.router.navigate(['/teacher-home']);
+  else if (role === 'parent') this.router.navigate(['/parent-home']);
+  
+}
+
 }

@@ -21,6 +21,7 @@ export class RegistrationPage implements OnInit {
     name: ['', Validators.required],
     surname: ['', Validators.required],
     password: ['', Validators.required],
+     role: ['student' as const, Validators.required],
   });
 
 
@@ -45,32 +46,25 @@ export class RegistrationPage implements OnInit {
     }
   }
 
-  save() {
-    if (this.fg.invalid) {
-      this.fg.markAllAsTouched();
-      return;
-    }
+ save() {
+  if (this.fg.invalid) { this.fg.markAllAsTouched(); return; }
 
-     const { email, name, surname, password } = this.fg.getRawValue();
+  const v = this.fg.getRawValue();
+  const res = this.auth.register({
+    email: v.email!,
+    name: v.name!,
+    surname: v.surname!,
+    password: v.password!,
+    role: v.role!,
+  });
 
-      const res = this.auth.register({
-      email: email!,
-      name: name!,
-      surname: surname!,
-      password: password!,
-    });
+  if (!res.ok) { alert(res.message); return; }
 
-    if (!res.ok) {
-      alert(res.message);
-      return;
-    }
-
-        this.router.navigate(['/auth/login']); 
-
-  }
-
-  
+  this.router.navigate(['/auth/login']);
 }
+}
+
+       
 
 
 
