@@ -1,30 +1,54 @@
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+
+import { AuthService } from '../../services/auth'; // ✅ important path (login is inside auth/)
 
 @Component({
   standalone: true,
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  imports: [IonicModule, CommonModule]
-  
+  imports: [IonicModule, CommonModule, ReactiveFormsModule],
 })
 export class LoginPage {
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+  });
 
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    private navCtrl: NavController,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   goInstituteLogin() {
-    this.navCtrl.navigateForward('/auth/institute-login', {
-      animated: false
-    });
-  }
-  goIndependentLogin() {
-    this.navCtrl.navigateForward('/auth/independent-login', {
-      animated: false
-    });
+    this.navCtrl.navigateForward('/auth/institute-login', { animated: false });
   }
 
+  goIndependentLogin() {
+    this.navCtrl.navigateForward('/auth/independent-login', { animated: false });
+  }
+
+  onLogin() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    const email = this.loginForm.value.email ?? '';
+    const password = this.loginForm.value.password ?? '';
+
+    const success = this.authService.login(email, password);
+
+    if (success) {
+      this.router.navigate(['/home']);
+    } else {
+      alert('Invalid email or password');
+    }
+  }
 }

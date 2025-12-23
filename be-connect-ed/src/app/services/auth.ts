@@ -13,8 +13,7 @@ export interface AppUser {
 export class AuthService {
  private USERS_KEY = 'users';
   private CURRENT_KEY = 'currentUser';
-  private isAuthenticated = false;
-
+  
 
    // Register new user
   register(user: AppUser): { ok: boolean; message?: string } {
@@ -28,6 +27,8 @@ export class AuthService {
 
     return { ok: true };
   }
+
+  
 
   // Login and set current user
   login(email: string, password: string): boolean {
