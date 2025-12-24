@@ -1,13 +1,15 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>
+      <img routerLink="/student/home" src="assets/images/logo.png" class="logo" />
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+
+<div class="background-plain">
+<ul>
+<ol class="name">{{ name }}  {{ surname }}</ol>
+<ol class="role">{{ role }}</ol>
+</ul>
+</div>

@@ -28,6 +28,7 @@ export class RegistrationPage implements OnInit {
   email = '';
   name = '';
   surname = '';
+roleSelectOpts: any;
 
  constructor(
     private fb: FormBuilder,
@@ -44,6 +45,8 @@ export class RegistrationPage implements OnInit {
       this.name = u.name;
       this.surname = u.surname;
     }
+    this.roleSelectOpts = { cssClass: 'role-select-alert' };
+
   }
 
  save() {
@@ -62,6 +65,8 @@ export class RegistrationPage implements OnInit {
 
   this.router.navigate(['/auth/login']);
 }
+
+
 }
 
        

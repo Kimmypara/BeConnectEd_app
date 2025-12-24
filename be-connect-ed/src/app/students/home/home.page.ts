@@ -25,11 +25,13 @@ export class HomePage {
     "Let’s make today amazing!",
     "Welcome back — let’s get things done!",
     "You’re doing great — keep going!",
-    'Keep up the good work!',
-    'Every step counts.',
-    'Believe in yourself.',
-    'Today is full of opportunities.',
-    'Small progress is still progress.'
+    "Your efforts matter. Keep shining!",
+    "You’re capable of amazing things.", 
+    "A new day, a new chance to succeed.", 
+    "Believe in yourself — you’ve got this!", 
+    "Let’s make learning joyful today!", 
+    "Progress is progress — no matter how small.", 
+    "Today is full of possibilities."
     ];
 
     this.positiveMessage = messages[Math.floor(Math.random() * messages.length)];

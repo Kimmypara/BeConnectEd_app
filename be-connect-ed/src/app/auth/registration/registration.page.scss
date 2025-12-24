@@ -1,0 +1,42 @@
+.form{
+  border-radius: 20px ;
+ --background: var(--ion-color-primary-contrast);
+  background-color:var(--ion-color-primary-contrast) ;
+  box-shadow: 4px 0px 4px rgba(4, 4, 4, 0.18);
+  width: 90% ;
+  margin: auto;
+  overflow: hidden;
+}
+
+.form ion-item {
+  --background: transparent;  
+}
+.form ion-select {
+  --background: transparent;  
+}
+.input{
+    color: var(--ion-color-primary);
+}
+
+.input ion-item{
+    color: var(--ion-color-primary);
+}
+
+.button{
+    width: 50% ;
+    margin-top: 1rem;
+     right: 50%;
+  transform: translateX(50%);
+}
+
+.form-title{
+     color: var(--ion-color-primary);
+     font-size: 1.3rem;
+     font-weight: 700;
+         left: 50%;
+  transform: translateX(30%);
+}
+
+
+
+

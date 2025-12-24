@@ -1,17 +1,14 @@
 
 
-
-  <ion-item lines="none" *ngIf="email!= ''">
-    <ion-text class="mainColor">Hello {{name}} {{surname}} ({{email}})</ion-text>
-  </ion-item>
-
-  <form (ngSubmit)="save();" [formGroup]="fg">
-    <ion-list>
+  <form  (ngSubmit)="save();" [formGroup]="fg">
+    <h2 class="form-title">Registration Form</h2>
+    <ion-list class="form">
       <ion-item>
-        <ion-input label="email" placeholder="email" formControlName="email" type="email" id="email"></ion-input>
+        <ion-input label="email" class="input" placeholder="email" formControlName="email" type="email" class="input" id="email"></ion-input>
       </ion-item>
-      <ion-item>
-  <ion-select label="Role" formControlName="role">
+      <ion-item >
+  <ion-select class="role-select" interface="alert"
+   [interfaceOptions]="roleSelectOpts" label="Role" class="input" formControlName="role">
     <ion-select-option value="student">Student</ion-select-option>
     <ion-select-option value="teacher">Teacher</ion-select-option>
     <ion-select-option value="parent">Parent</ion-select-option>
@@ -20,13 +17,13 @@
 </ion-item>
 
       <ion-item>
-        <ion-input label="First name" placeholder="Joe" formControlName="name"></ion-input>
+        <ion-input label="First name" class="input" placeholder="Joe" formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Last name" placeholder="Borg" formControlName="surname"></ion-input>
+        <ion-input label="Last name" class="input" placeholder="Borg" formControlName="surname"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Password" placeholder="Password" formControlName="password" type="password"  id="password"></ion-input>
+        <ion-input label="Password"class="input" placeholder="Password" formControlName="password" type="password"  id="password"></ion-input>
       </ion-item>
       <ion-item>
         <!--<ion-select label="Theme" formControlName="theme">
@@ -35,7 +32,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-button type="submit">Save</ion-button>
+    <ion-button type="submit" class="button">Save</ion-button>
   </form>
 
 
