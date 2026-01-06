@@ -6,6 +6,13 @@
       <ion-item>
         <ion-input label="email" class="input" placeholder="email" formControlName="email" type="email" class="input" id="email"></ion-input>
       </ion-item>
+
+<ion-text color="danger" *ngIf="fg.get('email')?.touched && fg.get('email')?.invalid">
+  Please enter a valid email address.
+</ion-text>
+
+
+
       <ion-item >
   <ion-select class="role-select" interface="alert"
    [interfaceOptions]="roleSelectOpts" label="Role" class="input" formControlName="role">
@@ -26,9 +33,7 @@
         <ion-input label="Password"class="input" placeholder="Password" formControlName="password" type="password"  id="password"></ion-input>
       </ion-item>
       <ion-item>
-        <!--<ion-select label="Theme" formControlName="theme">
-          <ion-select-option *ngFor="let t of themes" value="{{t.id}}">{{t.name}}</ion-select-option>
-        </ion-select>-->
+        
       </ion-item>
     </ion-list>
 

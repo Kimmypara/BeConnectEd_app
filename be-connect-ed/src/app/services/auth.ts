@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export type UserRole = 'student' | 'teacher' | 'parent' ;
+export type AccountType = 'institute' | 'independent';
 
 
 export interface AppUser {
@@ -9,6 +10,8 @@ export interface AppUser {
   name: string;
   surname: string;
    role: UserRole;
+
+   accountType: AccountType;
 }
 
 @Injectable({
@@ -17,7 +20,7 @@ export interface AppUser {
 export class AuthService {
  private USERS_KEY = 'users';
   private CURRENT_KEY = 'currentUser';
-  
+  private SEED_KEY = 'seededInstituteUsers';
 
    // Register new user
   register(user: AppUser): { ok: boolean; message?: string } {
@@ -55,10 +58,48 @@ export class AuthService {
   }
 
   signOut(): void {
-  localStorage.removeItem('currentUser');
+  localStorage.removeItem(this.CURRENT_KEY);
 }
 
+seedInstituteUsersOnce(): void {
+  const alreadySeeded = localStorage.getItem(this.SEED_KEY);
+  if (alreadySeeded === 'yes') return;
+
+  const instituteUsers: AppUser[] = [
+    {
+      email: 'teacher1@school.com',
+      password: 'Teacher123!',
+      name: 'Maria',
+      surname: 'Borg',
+      role: 'teacher',
+      accountType: 'institute',
+    },
+    {
+      email: 'student1@school.com',
+      password: 'Student123!',
+      name: 'Katia',
+      surname: 'Camilleri',
+      role: 'student',
+      accountType: 'institute',
+    },
+  ];
+
+  const users = this.getUsers();
+  const merged = [...users];
+
+  instituteUsers.forEach(u => {
+    const exists = merged.some(x => x.email.toLowerCase() === u.email.toLowerCase());
+    if (!exists) merged.push(u);
+  });
+
+  localStorage.setItem(this.USERS_KEY, JSON.stringify(merged));
+  localStorage.setItem(this.SEED_KEY, 'yes');
 }
+
+
+}
+
+
   
 
  

@@ -48,13 +48,23 @@ export class InstituteLoginComponent {
     return;
   }
 
+   const user = result.user!;
+
+  //  Enforce Institute login screen
+  if (user.accountType !== 'institute') {
+    alert('This is an Independent account. Please use Independent Login.');
+    return;
+  }
+
   const role = result.user!.role;
 
   if (role === 'teacher') {
     this.router.navigate(['/teacher-home']);
-  } else if (role === 'parent') {
-    this.router.navigate(['/parent-home']); // only if you create this route
-  } else {
+  } 
+  //else if (role === 'parent') {
+   // this.router.navigate(['/parent-home']); // for later
+  //}
+   else {
     // student (default)
     this.router.navigate(['/student/home']);
   }

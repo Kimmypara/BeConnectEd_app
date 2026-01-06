@@ -54,14 +54,19 @@ if (!result.ok) {
 const role = result.user!.role;
 
 if (role === 'teacher') {
-  this.navCtrl.navigateRoot('/teacher-home');
+  this.navCtrl.navigateRoot('/teacher-home'); // teacher
 } else if (role === 'parent') {
-  this.navCtrl.navigateRoot('/parent-home'); // (you don't have parent routes yet)
+  this.navCtrl.navigateRoot('/parent-home'); // (for later)
 } else {
-  this.navCtrl.navigateRoot('/student/home'); // ✅ student
+  this.navCtrl.navigateRoot('/student/home'); // student
 }
 
 }
+
+goIndependentRegister() {
+  this.navCtrl.navigateForward('/auth/registration?type=independent'); // create account independent 
+}
+
 
 }
   

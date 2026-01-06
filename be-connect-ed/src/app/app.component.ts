@@ -47,6 +47,7 @@ constructor(private router: Router, private auth: AuthService) {
 
       const u = this.auth.getCurrentUser();
       this.role = (u?.role as any) || '';
+      this.auth.seedInstituteUsersOnce();
     });
   }
 

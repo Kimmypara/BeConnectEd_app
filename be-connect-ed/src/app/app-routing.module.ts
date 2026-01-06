@@ -82,6 +82,32 @@ const routes: Routes = [
     loadChildren: () => import('./teachers/teacher-profile/teacher-profile.module').then( m => m.TeacherProfilePageModule)
   },
 { path: '**', redirectTo: 'auth/login' },
+  {
+    path: 'ind-teacher-home',
+    loadChildren: () => import('./independent-teachers/ind-teacher-home/ind-teacher-home.module').then( m => m.IndTeacherHomePageModule)
+  },
+  {
+    path: 'ind-teacher-profile',
+    loadChildren: () => import('./independent-teachers/ind-teacher-profile/ind-teacher-profile.module').then( m => m.IndTeacherProfilePageModule)
+  },
+  {
+    path: 'ind-teacher-course',
+    loadChildren: () => import('./independent-teachers/ind-teacher-course/ind-teacher-course.module').then( m => m.IndTeacherCoursePageModule)
+  },
+  {
+    path: 'ind-teacher-enrolment',
+    loadChildren: () => import('./independent-teachers/ind-teacher-enrolment/ind-teacher-enrolment.module').then( m => m.IndTeacherEnrolmentPageModule)
+  },
+  {
+    path: 'ind-teacher-unit',
+    loadChildren: () => import('./independent-teachers/ind-teacher-unit/ind-teacher-unit.module').then( m => m.IndTeacherUnitPageModule)
+  },
+  {
+    path: 'ind-teacher-unit',
+    loadChildren: () => import('./independent-teachers/ind-teacher-unit/ind-teacher-unit.module').then( m => m.IndTeacherUnitPageModule)
+  },
+
+
 
 ];
 

@@ -29,6 +29,7 @@ export class RegistrationPage implements OnInit {
   name = '';
   surname = '';
 roleSelectOpts: any;
+  navCtrl: any;
 
  constructor(
     private fb: FormBuilder,
@@ -49,21 +50,50 @@ roleSelectOpts: any;
 
   }
 
- save() {
-  if (this.fg.invalid) { this.fg.markAllAsTouched(); return; }
+save() {
+  console.log('SAVE CLICKED', this.fg.getRawValue());
+
+if (this.fg.invalid) {
+  const keys = ['email', 'name', 'surname', 'password', 'role'] as const;
+
+  const invalid = keys.filter(k => this.fg.get(k)?.invalid);
+
+  console.log('INVALID CONTROLS:', invalid);
+  console.log('CONTROL ERRORS:', {
+    email: this.fg.get('email')?.errors,
+    name: this.fg.get('name')?.errors,
+    surname: this.fg.get('surname')?.errors,
+    password: this.fg.get('password')?.errors,
+    role: this.fg.get('role')?.errors,
+  });
+
+  this.fg.markAllAsTouched();
+  return;
+}
+
 
   const v = this.fg.getRawValue();
+
   const res = this.auth.register({
     email: v.email!,
     name: v.name!,
     surname: v.surname!,
     password: v.password!,
     role: v.role!,
+    accountType: 'independent', //  self-register = independent
   });
 
-  if (!res.ok) { alert(res.message); return; }
+  console.log('REGISTER RESULT', res);
 
-  this.router.navigate(['/auth/login']);
+  if (!res.ok) {
+    alert(res.message || 'Registration failed');
+    return;
+  }
+
+  alert('Registered successfully ✅ Going to login...');
+ this.router.navigate(['/auth/login']);
+
+ 
 }
 
 
