@@ -1,15 +1,45 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title class="title-center">
       <img routerLink="/student/home" src="assets/images/logo.png" class="logo" />
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <div class="background-plain">
-<ul>
-<ol class="name">{{ name }}  {{ surname }}</ol>
-<ol class="role">{{ role }}</ol>
-</ul>
+  <div class="profile-center">
+
+    <h2 class="profile-title">Profile</h2>
+    <br>
+
+    <p class="profile-name">{{ name }} {{ surname }}</p>
+    <p class="profile-role">{{ role }}</p>
+
+    
+
+    <img
+  [src]="profileImage || 'assets/images/profile-icon.png'" class="profile-img" alt="Profile image"/>
+
+<!-- hidden file input -->
+<input
+  #fileInput type="file" accept="image/*" hidden (change)="onFileSelected($event)"
+/>
+
+    <div class="icons">
+    <div fill="clear" (click)="upload()"  aria-label="Upload" >
+  <ion-icon class="upload-icon" aria-hidden="true" md="cloud-upload-outline" ios="cloud-upload-sharp"></ion-icon>
+      <span class="upload-text">Upload Image</span>
+</div>
+
+   <div fill="clear" (click)="removeImage()" aria-label="Trash">
+  <ion-icon class="upload-icon" aria-hidden="true" md="trash-outline" ios="trash-sharp"></ion-icon>
+      <span class="upload-text">Bin</span>
+</div>
+</div>
+
+   <!-- Buttons -->
+    <div class="buttons ion-text-secondary">
+     <ion-button expand="block" (click)="signOut()" fill="solid" class="signOut-btn">Sign Out</ion-button>
+
+  </div>
 </div>

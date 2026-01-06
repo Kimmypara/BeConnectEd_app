@@ -53,6 +53,11 @@ export class AuthService {
     const raw = localStorage.getItem(this.USERS_KEY);
     return raw ? (JSON.parse(raw) as AppUser[]) : [];
   }
+
+  signOut(): void {
+  localStorage.removeItem('currentUser');
+}
+
 }
   
 
