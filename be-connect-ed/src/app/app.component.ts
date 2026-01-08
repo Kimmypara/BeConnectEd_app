@@ -94,6 +94,25 @@ get menuItems(): MenuItem[] {
   return this.studentMenu;
 }
 
+get user() {
+  return this.auth.getCurrentUser();
+}
+
+get isInstituteStudent(): boolean {
+  return !!this.user && this.user.accountType === 'institute' && this.user.role === 'student';
+}
+
+get isIndependentStudent(): boolean {
+  return !!this.user && this.user.accountType === 'independent' && this.user.role === 'student';
+}
+
+get isInstituteTeacher(): boolean {
+  return !!this.user && this.user.accountType === 'institute' && this.user.role === 'teacher';
+}
+
+get isIndependentTeacher(): boolean {
+  return !!this.user && this.user.accountType === 'independent' && this.user.role === 'teacher';
+}
 
 
   }

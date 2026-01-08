@@ -5,12 +5,12 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-ind-student-bottom-nav',
-  templateUrl: './ind-student-bottom-nav.component.html',
-  styleUrls: ['./ind-student-bottom-nav.component.scss'],
+  selector: 'app-ind-teacher-bottom-nav',
+  templateUrl: './ind-teacher-bottom-nav.component.html',
+  styleUrls: ['./ind-teacher-bottom-nav.component.scss'],
   standalone: true,
   imports: [IonicModule, RouterModule, CommonModule],
 })
-export class IndStudentBottomNavComponent implements OnInit {
+export class IndTeacherBottomNavComponent implements OnInit {
   ngOnInit() {}
 }

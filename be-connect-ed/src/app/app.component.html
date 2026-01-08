@@ -1,7 +1,5 @@
 <ion-app>
 
-  <!-- LOGIN / AUTH PAGES -->
-  <ion-router-outlet ></ion-router-outlet>
   
 
   <!-- MAIN APP LAYOUT -->
@@ -51,11 +49,16 @@
 
     <!-- BOTTOM NAV -->
    
-<app-bottom-nav *ngIf="!hideChrome && role === 'student'"></app-bottom-nav>
-<!--<app-parent-bottom-nav  *ngIf="!hideChrome && role === 'parent'"></app-parent-bottom-nav>-->
-<app-teachers-bottom-nav *ngIf="!hideChrome && role === 'teacher'"></app-teachers-bottom-nav>
 
- 
+ <!-- Institute -->
+<app-bottom-nav *ngIf="!hideChrome && isInstituteStudent"></app-bottom-nav>
+<app-teachers-bottom-nav *ngIf="!hideChrome && isInstituteTeacher"></app-teachers-bottom-nav>
+
+
+<!-- Independent -->
+<app-ind-student-bottom-nav *ngIf="!hideChrome && isIndependentStudent"></app-ind-student-bottom-nav>
+<app-ind-teacher-bottom-nav *ngIf="!hideChrome && isIndependentTeacher"></app-ind-teacher-bottom-nav>
+
 
   <!-- BACKGROUND -->
   <div class="background"></div>

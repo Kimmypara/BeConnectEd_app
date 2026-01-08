@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { IndStudentBottomNavComponent } from './ind-student-bottom-nav.component';
+import { IndTeacherBottomNavComponent  } from './ind-teacher-bottom-nav.component';
 
-describe('IndStudentBottomNavComponent', () => {
-  let component: IndStudentBottomNavComponent;
-  let fixture: ComponentFixture<IndStudentBottomNavComponent>;
+describe('IndTeacherBottomNavComponent ', () => {
+  let component: IndTeacherBottomNavComponent ;
+  let fixture: ComponentFixture<IndTeacherBottomNavComponent >;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndStudentBottomNavComponent ],
+      declarations: [ IndTeacherBottomNavComponent  ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(IndStudentBottomNavComponent);
+    fixture = TestBed.createComponent(IndTeacherBottomNavComponent );
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

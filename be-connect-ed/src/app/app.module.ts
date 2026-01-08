@@ -17,7 +17,8 @@ import { Router } from '@angular/router';
 import { from, Subject } from 'rxjs';
 import { TeachersBottomNavComponent } from "./teachers/teachers-bottom-nav/teachers-bottom-nav.component";
 
-
+import { IndStudentBottomNavComponent } from './independent-students/ind-student-bottom-nav/ind-student-bottom-nav.component';
+import { IndTeacherBottomNavComponent } from './independent-teachers/ind-teacher-bottom-nav/ind-teacher-bottom-nav.component';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { TeachersBottomNavComponent } from "./teachers/teachers-bottom-nav/teach
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     BottomNavComponent,
-    TeachersBottomNavComponent
+    TeachersBottomNavComponent,
+     IndStudentBottomNavComponent,
+    IndTeacherBottomNavComponent
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
