@@ -1,18 +1,29 @@
+
+
+
 <ion-img
 src="assets/images/logo.png"
 alt="Be connected logo"
    class="logo"
 ></ion-img>
 
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+  
+  
+    <ion-item lines="none" class="input-item">
+      <ion-input type="email" placeholder="E-mail" formControlName="email" required ></ion-input>
+    </ion-item>
 
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-  <ion-item>
-    <ion-input label="Email" type="email" formControlName="email"></ion-input>
-  </ion-item>
+       <ion-item lines="none" class="input-item">
+        <ion-input type="password" placeholder="Password" formControlName="password" required></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-input label="Password" type="password" formControlName="password"></ion-input>
-  </ion-item>
+        <div class="forgot">
+        <ion-text color="primary">Forgot Password</ion-text>
+      </div>
 
-  <ion-button expand="block" type="submit">Login</ion-button>
-</form>
+        <ion-button expand="block" fill="solid" class="buttons" type="submit">
+        Login
+        </ion-button>
+
+  </form>

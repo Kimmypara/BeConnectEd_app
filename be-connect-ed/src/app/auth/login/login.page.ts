@@ -64,7 +64,7 @@ if (role === 'teacher') {
 }
 
 goIndependentRegister() {
-  this.navCtrl.navigateForward('/auth/registration?type=independent'); // create account independent 
+  this.navCtrl.navigateForward('/auth/independent-registration'); // create account independent 
 }
 
 

@@ -48,11 +48,11 @@ export class IndependentLoginComponent {
 
     //  Redirect by role
    if (user.role === 'teacher') {
-  this.router.navigate(['/teacher-home']);
+  this.router.navigate(['/ind-teacher-home']);
 } else if (user.role === 'parent') {
-  this.router.navigate(['/student/home']); // temporary for parent
+  this.router.navigate(['/ind-student-home']); // temporary for parent
 } else {
-  this.router.navigate(['/student/home']); // student
+  this.router.navigate(['/ind-student-home']); // student
 }
  
   }

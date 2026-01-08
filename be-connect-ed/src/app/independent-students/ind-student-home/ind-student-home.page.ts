@@ -1,0 +1,52 @@
+
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth';
+
+@Component({
+  selector: 'app-ind-student-home',
+  templateUrl: './ind-student-home.page.html',
+  styleUrls: ['./ind-student-home.page.scss'],
+  standalone: false,
+})
+
+
+export class IndStudentHomePage {
+
+  greeting = '';
+  name = '';
+  positiveMessage = '';
+
+  constructor(private auth: AuthService) {}
+
+  ngOnInit() {
+    const hour = new Date().getHours();
+    this.greeting = hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening';
+
+    const messages = [
+    "Let’s make today amazing!",
+    "Welcome back — let’s get things done!",
+    "You’re doing great — keep going!",
+    "Your efforts matter. Keep shining!",
+    "You’re capable of amazing things.", 
+    "A new day, a new chance to succeed.", 
+    "Believe in yourself — you’ve got this!", 
+    "Let’s make learning joyful today!", 
+    "Progress is progress — no matter how small.", 
+    "Today is full of possibilities."
+    ];
+
+    this.positiveMessage = messages[Math.floor(Math.random() * messages.length)];
+
+    const user = this.auth.getCurrentUser();
+    this.name = user ? `${user.name} ${user.surname}` : '';
+  }
+}
+
+
+
+ 
+
+
+
+
+

@@ -1,0 +1,45 @@
+
+
+  <form  (ngSubmit)="save();" [formGroup]="fg">
+    <h2 class="form-title">Registration Form for Independent Users</h2>
+    <ion-list class="form">
+      <ion-item>
+        <ion-input label="email" class="input" placeholder="email" formControlName="email" type="email" class="input" id="email"></ion-input>
+      </ion-item>
+
+<ion-text color="danger" *ngIf="fg.get('email')?.touched && fg.get('email')?.invalid">
+  Please enter a valid email address.
+</ion-text>
+
+
+
+      <ion-item >
+  <ion-select class="role-select" interface="alert"
+   [interfaceOptions]="roleSelectOpts" label="Role" class="input" formControlName="role">
+    <ion-select-option value="student">Student</ion-select-option>
+    <ion-select-option value="teacher">Teacher</ion-select-option>
+    <ion-select-option value="parent">Parent</ion-select-option>
+    
+  </ion-select>
+</ion-item>
+
+      <ion-item>
+        <ion-input label="First name" class="input" placeholder="Joe" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Last name" class="input" placeholder="Borg" formControlName="surname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Password"class="input" placeholder="Password" formControlName="password" type="password"  id="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        
+      </ion-item>
+    </ion-list>
+
+    <ion-button type="submit" class="button">Save</ion-button>
+  </form>
+
+
+
+

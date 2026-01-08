@@ -22,9 +22,13 @@ const routes: Routes = [
     import('./auth/independent-login/independent-login.component')
       .then(m => m.IndependentLoginComponent)
 },
- {
-    path: 'auth/registration',
-    loadChildren: () => import('./auth/registration/registration.module').then( m => m.RegistrationPageModule)
+    {
+    path: 'auth/independent-registration',
+    loadChildren: () => import('./auth/independent-registration/independent-registration.module').then( m => m.IndependentRegistrationPageModule)
+  },
+  {
+    path: 'auth/institute-registration',
+    loadChildren: () => import('./auth/institute-registration/institute-registration.module').then( m => m.InstituteRegistrationPageModule)
   },
 
    // STUDENT AREA
@@ -81,7 +85,9 @@ const routes: Routes = [
     path: 'teacher-profile',
     loadChildren: () => import('./teachers/teacher-profile/teacher-profile.module').then( m => m.TeacherProfilePageModule)
   },
-{ path: '**', redirectTo: 'auth/login' },
+
+
+// INDEPENDENT TEACHERS AREA
   {
     path: 'ind-teacher-home',
     loadChildren: () => import('./independent-teachers/ind-teacher-home/ind-teacher-home.module').then( m => m.IndTeacherHomePageModule)
@@ -102,13 +108,50 @@ const routes: Routes = [
     path: 'ind-teacher-unit',
     loadChildren: () => import('./independent-teachers/ind-teacher-unit/ind-teacher-unit.module').then( m => m.IndTeacherUnitPageModule)
   },
+   {
+    path: 'ind-teacher-calendar',
+    loadChildren: () => import('./independent-teachers/ind-teacher-calendar/ind-teacher-calendar.module').then( m => m.IndTeacherCalendarPageModule)
+  },
   {
-    path: 'ind-teacher-unit',
-    loadChildren: () => import('./independent-teachers/ind-teacher-unit/ind-teacher-unit.module').then( m => m.IndTeacherUnitPageModule)
+    path: 'ind-teacher-chats',
+    loadChildren: () => import('./independent-teachers/ind-teacher-chats/ind-teacher-chats.module').then( m => m.IndTeacherChatsPageModule)
+  },
+  {
+    path: 'ind-teacher-notifications',
+    loadChildren: () => import('./independent-teachers/ind-teacher-notifications/ind-teacher-notifications.module').then( m => m.IndTeacherNotificationsPageModule)
   },
 
-
-
+// INDEPENDENT STUDENTS AREA
+  {
+    path: 'ind-student-home',
+    loadChildren: () => import('./independent-students/ind-student-home/ind-student-home.module').then( m => m.IndStudentHomePageModule)
+  },
+  {
+    path: 'ind-student-course',
+    loadChildren: () => import('./independent-students/ind-student-course/ind-student-course.module').then( m => m.IndStudentCoursePageModule)
+  },
+  {
+    path: 'ind-student-enrolment',
+    loadChildren: () => import('./independent-students/ind-student-enrolment/ind-student-enrolment.module').then( m => m.IndStudentEnrolmentPageModule)
+  },
+  {
+    path: 'ind-student-profile',
+    loadChildren: () => import('./independent-students/ind-student-profile/ind-student-profile.module').then( m => m.IndStudentProfilePageModule)
+  },
+  {
+    path: 'ind-student-notifications',
+    loadChildren: () => import('./independent-students/ind-student-notifications/ind-student-notifications.module').then( m => m.IndStudentNotificationsPageModule)
+  },
+  {
+    path: 'ind-student-chats',
+    loadChildren: () => import('./independent-students/ind-student-chats/ind-student-chats.module').then( m => m.IndStudentChatsPageModule)
+  },
+  {
+    path: 'ind-student-calendar',
+    loadChildren: () => import('./independent-students/ind-student-calendar/ind-student-calendar.module').then( m => m.IndStudentCalendarPageModule)
+  },
+ 
+{ path: '**', redirectTo: 'auth/login' },
 ];
 
 @NgModule({

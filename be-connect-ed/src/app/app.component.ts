@@ -14,12 +14,12 @@ type MenuItem = { title: string; url: string };
 })
 
 
-
   export class AppComponent {
   hideChrome = false;
   role: 'student' | 'parent' | 'teacher' | '' = '';
+  accountType: 'institute' | 'independent' | '' = '';
 
-  // 3 menus
+  // institute menus
   studentMenu: MenuItem[] = [
   { title: 'Home', url: '/student/home' },
   { title: 'Plan & Schedule', url: '/student/calendar' },
@@ -40,24 +40,62 @@ teacherMenu = [
   { title: 'Profile', url: '/teacher-profile' },    
 ];
 
-constructor(private router: Router, private auth: AuthService) {
-    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
-      const url = this.router.url;
-      this.hideChrome = url.startsWith('/auth');
+// independent menus
+  indStudentMenu: MenuItem[] = [
+  { title: 'Home', url: '/ind-student-home' },
+  { title: 'Plan & Schedule', url: '/ind-student-calendar' },
+  { title: 'Enrolment', url: '/ind-student-enrolment' },
+  { title: 'Courses', url: '/ind-student-course' },
+  { title: 'Notifications', url: '/ind-student-notifications' },
+  { title: 'Chats', url: '/ind-student-chats' },
+  { title: 'Profile', url: '/ind-student-profile' },
+];
 
-      const u = this.auth.getCurrentUser();
-      this.role = (u?.role as any) || '';
-      this.auth.seedInstituteUsersOnce();
-    });
-  }
+  indTeacherMenu: MenuItem[] = [
+  { title: 'Home', url: '/ind-teacher-home' },
+  { title: 'Plan & Schedule', url: '/ind-teacher-calendar' },
+  { title: 'Enrolment', url: '/ind-teacher-enrolment' },
+  { title: 'Courses', url: '/ind-teacher-course' },
+  { title: 'Notifications', url: '/ind-teacher-notifications' },
+  { title: 'Units', url: '/ind-teacher-unit' },
+  { title: 'Profile', url: '/ind-teacher-profile' },
+  { title: 'Chats', url: '/ind-teacher-chats' },
+];
+
+constructor(private router: Router, private auth: AuthService) {
+  this.auth.seedInstituteUsersOnce(); //  once
+
+this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+  const url = this.router.url;
+  this.hideChrome = url.startsWith('/auth');
+
+  const u = this.auth.getCurrentUser();
+  this.role = (u?.role as any) || '';
+});
+
+}
 
 get menuItems(): MenuItem[] {
-  if (this.role === 'student') return this.studentMenu;
-  if (this.role === 'teacher') return this.teacherMenu;
-  //if (this.role === 'parent') return this.parentMenu; 
+  const user = this.auth.getCurrentUser();
+  if (!user) return [];
 
-  return this.studentMenu; 
+  if (user.accountType === 'independent') {
+    if (user.role === 'teacher') return this.indTeacherMenu;
+    if (user.role === 'student') return this.indStudentMenu;
+    return this.indStudentMenu;
+  }
+
+  if (user.accountType === 'institute') {
+    if (user.role === 'teacher') return this.teacherMenu;
+    if (user.role === 'student') return this.studentMenu;
+    return this.studentMenu;
+  }
+
+  return this.studentMenu;
 }
+
+
+
   }
 
 
