@@ -5,3 +5,29 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
+
+<h2>Available Courses</h2>
+
+<ion-list>
+  <ion-item button *ngFor="let c of courses" (click)="selectCourse(c)">
+    <ion-label>
+      <h3>{{ c.title }}</h3>
+      <p>{{ c.description }}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<div *ngIf="selectedCourse as course">
+  <h2>Units in: {{ course.title }}</h2>
+
+  <ul>
+    <li *ngFor="let id of course.unitIds">
+      {{ getUnitName(id) }}
+    </li>
+  </ul>
+
+  <ion-button expand="block" (click)="enroll(course.id)">Enroll</ion-button>
+</div>
+
+

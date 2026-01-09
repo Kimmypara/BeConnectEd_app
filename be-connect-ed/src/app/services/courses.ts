@@ -21,6 +21,15 @@ export interface Unit {
   ects_credits: number;
 }
 
+export interface IndependentCourse {
+  id: number;
+  title: string;
+  description: string;
+  unitIds: number[];
+  createdByEmail: string;
+}
+
+
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
   public courseList: Course[] = [];

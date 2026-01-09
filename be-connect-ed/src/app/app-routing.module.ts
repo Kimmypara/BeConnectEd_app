@@ -31,6 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./auth/institute-registration/institute-registration.module').then( m => m.InstituteRegistrationPageModule)
   },
 
+
    // STUDENT AREA
   { path: 'student/home', 
     loadChildren: () => import('./students/home/home.module').then(m => m.HomePageModule) 
@@ -152,6 +153,8 @@ const routes: Routes = [
   },
  
 { path: '**', redirectTo: 'auth/login' },
+
+
 ];
 
 @NgModule({

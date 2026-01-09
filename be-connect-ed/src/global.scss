@@ -137,6 +137,19 @@ ion-content {
   --padding-end: 0 !important;
 }
 
+.units-alert .alert-wrapper {
+  background: var(--ion-color-primary-contrast) !important;
+  color: var(--ion-color-primary) !important;
+}
+
+.units-alert .alert-title,
+.units-alert .alert-radio-label,
+.units-alert button {
+  color: var(--ion-color-primary) !important;
+  background: var(--ion-color-primary-contrast) !important;
+}
+
+
 
 
 /* Target the alert overlay when ion-select opens */
