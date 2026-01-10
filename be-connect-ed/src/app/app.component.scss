@@ -1,22 +1,21 @@
 .logo-title {
-  position: fixed;
-  left: 60%;
-  transform: translateX(-40%);
-  text-align: center;
-  top: 2rem;
+display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .toolbar-with-logo {
-  --min-height: 56px;   /* default Ionic toolbar height */
+  --min-height: 120px;   /* default Ionic toolbar height */
+  width: auto;
+  display: block;
+
 }
 
-
-.center-logo {
-  left: 50%;
-  transform: translateX(-50%);
-   z-index: 999;
+.toolbar-logo {
+  max-height: 50px;
+  object-fit: contain;
 }
-
 
 
 ion-menu::part(backdrop) {

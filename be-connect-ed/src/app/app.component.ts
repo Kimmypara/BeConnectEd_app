@@ -75,6 +75,8 @@ this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() =>
 
 }
 
+
+
 get menuItems(): MenuItem[] {
   const user = this.auth.getCurrentUser();
   if (!user) return [];
@@ -114,8 +116,56 @@ get isIndependentTeacher(): boolean {
   return !!this.user && this.user.accountType === 'independent' && this.user.role === 'teacher';
 }
 
+ goHomeByRole() {
+    const u = this.auth.getCurrentUser();
 
+    // not logged in -> go to login (or your landing page)
+    if (!u) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
+
+    // ✅ Independent
+    if (u.accountType === 'independent') {
+      if (u.role === 'teacher') {
+        this.router.navigate(['/ind-teacher-home']);
+        return;
+      }
+      if (u.role === 'student') {
+        this.router.navigate(['/ind-student-home']);
+        return;
+      }
+      if (u.role === 'parent') {
+        // if you don't have parent yet, choose where to send them
+        this.router.navigate(['/ind-student-home']);
+        return;
+      }
+    }
+
+    // ✅ Institute
+    if (u.accountType === 'institute') {
+      if (u.role === 'teacher') {
+        this.router.navigate(['/teacher-home']);
+        return;
+      }
+      if (u.role === 'student') {
+        this.router.navigate(['/student/home']);
+        return;
+      }
+      if (u.role === 'parent') {
+        // if you don't have parent yet, choose where to send them
+        this.router.navigate(['/student/home']);
+        return;
+      }
+    }
+
+    // fallback
+    this.router.navigate(['/auth/login']);
   }
+}
+
+
+  
 
 
 

@@ -10,32 +10,39 @@ import { IndependentLearning, IndependentCourse } from 'src/app/services/indepen
   standalone: false,
 })
 export class IndStudentCoursePage implements OnInit {
-  units: Unit[] = [];
   courses: IndependentCourse[] = [];
-  selectedCourse: IndependentCourse | null = null;
+  units: Unit[] = [];
+
+  // used to expand/collapse units per card
+  openCourseId: string | null = null;
 
   constructor(
-    private coursesService: CoursesService,
-    private ind: IndependentLearning
+    private ind: IndependentLearning,
+    private coursesService: CoursesService
   ) {}
 
   ngOnInit() {
-    this.units = this.coursesService.unitList;
-    this.courses = this.ind.getAvailableCourses(); // ✅ student uses this
+    this.courses = this.ind.getAvailableCourses(); // independent teacher created courses
+    this.units = this.coursesService.unitList;     // unit names from your array
   }
 
-  selectCourse(c: IndependentCourse) {
-    this.selectedCourse = c;
+  toggleCourse(id: string) {
+    this.openCourseId = (this.openCourseId === id) ? null : id;
+  }
+
+  isOpen(id: string) {
+    return this.openCourseId === id;
   }
 
   getUnitName(id: number) {
-    return this.units.find(u => u.unit_id === id)?.unit_name ?? 'Unknown unit';
+    const u = this.units.find(x => x.unit_id === Number(id));
+    return u ? `${u.unit_code} - ${u.unit_name}` : 'Unknown unit';
   }
 
   enroll(courseId: string) {
     const res = this.ind.enroll(courseId);
     if (!res.ok) {
-      alert(res.message);
+      alert(res.message || 'Could not enroll.');
       return;
     }
     alert('Enrolled ✅');

@@ -1,33 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <img routerLink="/ind-student-home" src="assets/images/logo.png" class="logo" />
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
+ <div><h2 class="page-title">Available Courses</h2></div>
 
-<h2>Available Courses</h2>
+ <ion-content class="page-content">
+  <ion-card class="course-card" *ngFor="let c of courses">
+    <ion-card-header>
+      <ion-card-subtitle class="course-desc">{{ c.description }}</ion-card-subtitle>
+      <ion-card-title class="course-title">{{ c.title }}</ion-card-title>
+      
+    </ion-card-header>
 
-<ion-list>
-  <ion-item button *ngFor="let c of courses" (click)="selectCourse(c)">
-    <ion-label>
-      <h3>{{ c.title }}</h3>
-      <p>{{ c.description }}</p>
-    </ion-label>
-  </ion-item>
-</ion-list>
+    <ion-card-content>
+      <div class="units-box" *ngIf="c.unitIds?.length">
+        <ul class="units-list">
+          <li *ngFor="let id of c.unitIds">{{ getUnitName(id) }}</li>
+        </ul>
+      </div>
 
-<div *ngIf="selectedCourse as course">
-  <h2>Units in: {{ course.title }}</h2>
+      <ion-button expand="block" class="enroll-btn" (click)="enroll(c.id)">
+        Enroll
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <ul>
-    <li *ngFor="let id of course.unitIds">
-      {{ getUnitName(id) }}
-    </li>
-  </ul>
-
-  <ion-button expand="block" (click)="enroll(course.id)">Enroll</ion-button>
-</div>
-
-
+</ion-content>

@@ -16,8 +16,8 @@ export class IndTeacherCoursePage implements OnInit {
 
   title = '';
   description = '';
-roleSelectOpts: any;
-unitsSelectOpts: any;
+
+unitsSelectOpts = { cssClass: 'units-select-alert' };
 
   constructor(
     private courses: CoursesService,
@@ -86,15 +86,38 @@ get unitsSelectedText(): string {
 
 
 
-  create() {
+   create() {
+    const cleanTitle = (this.title || '').trim();
+    const cleanDesc = (this.description || '').trim();
+    const hasUnits = this.selectedUnitIds && this.selectedUnitIds.length > 0;
+
+    // empty field message
+    if (!cleanTitle && !cleanDesc && !hasUnits) {
+      alert('Please fill in Title, Description and select at least 1 Unit.');
+      return;
+    }
+    if (!cleanTitle) {
+      alert('Please enter a Title.');
+      return;
+    }
+    if (!cleanDesc) {
+      alert('Please enter a Description.');
+      return;
+    }
+    if (!hasUnits) {
+      alert('Please select at least 1 Unit.');
+      return;
+    }
+
+    // create
     const res = this.ind.createCourse({
-      title: this.title,
-      description: this.description,
-      unitIds: this.selectedUnitIds
+      title: cleanTitle,
+      description: cleanDesc,
+      unitIds: this.selectedUnitIds,
     });
 
     if (!res.ok) {
-      alert(res.message);
+      alert(res.message || 'Could not create course.');
       return;
     }
 

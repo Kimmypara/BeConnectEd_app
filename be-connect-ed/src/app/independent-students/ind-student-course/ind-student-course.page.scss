@@ -1,0 +1,71 @@
+.page-content{
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-bottom: 90px;
+  height: 70vh;
+  
+}
+
+.page-title{
+position: fixed;
+ left: 50%;
+  transform: translateX(-50%);
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  margin:auto;
+  font-size: 1.2rem;
+}
+
+
+
+
+/* ✅ Real card look */
+.course-card{
+    width: 90%;
+    margin: 2rem auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ion-color-primary-contrast);
+  box-shadow: 4px 0px 4px rgba(4, 4, 4, 0.18);
+}
+
+ion-content {
+  --padding-bottom: calc(90px + env(safe-area-inset-bottom));
+}
+
+
+/* ✅ Title + description should wrap */
+.course-title,
+.course-desc{
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  color: var(--ion-color-primary);
+}
+
+.course-desc{
+  opacity: 0.9;
+}
+
+/* ✅ Units area scrolls, card does NOT grow */
+.units-box{
+  max-height: 140px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.35);
+  margin-bottom: 12px;
+  margin-top: 10px;
+}
+
+.units-list{
+  margin: 0;
+  padding-left: 16px;
+  color: var(--ion-color-primary);
+}
+
+.enroll-btn{
+  height: 44px;
+}
+
