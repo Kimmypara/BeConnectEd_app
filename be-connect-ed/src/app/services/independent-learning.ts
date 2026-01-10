@@ -21,6 +21,9 @@ export interface IndependentEnrollment {
 
 @Injectable({ providedIn: 'root' })
 export class IndependentLearning {
+  find(courseId: string) {
+    throw new Error('Method not implemented.');
+  }
   private COURSES_KEY = 'independentCourses';
   private ENROLL_KEY = 'independentEnrollments';
 
@@ -100,34 +103,62 @@ export class IndependentLearning {
     return this.getCourses().filter(c => c.isActive);
   }
 
+  // Get a single course by id
   getCourseById(courseId: string): IndependentCourse | null {
   return this.getCourses().find(c => c.id === courseId) ?? null;
 }
 
+getMyEnrolledCourses(): IndependentCourse[] {
+  const u = this.auth.getCurrentUser();
 
-  enroll(courseId: string) {
-    const u = this.auth.getCurrentUser();
-    if (!u || u.accountType !== 'independent' || u.role !== 'student') {
-      return { ok: false, message: 'Only independent students can enroll.' };
-    }
+  // ✅ must be logged in as independent student
+  if (!u || u.accountType !== 'independent' || u.role !== 'student') return [];
 
-    const course = this.getCourses().find(c => c.id === courseId && c.isActive);
-    if (!course) return { ok: false, message: 'Course not found.' };
+  const enrollments = this.getEnrollments().filter(e => e.studentEmail === u.email);
+  const courses = this.getCourses();
 
-    const all = this.getEnrollments();
-    const exists = all.some(e => e.studentEmail === u.email && e.courseId === courseId);
-    if (exists) return { ok: false, message: 'Already enrolled.' };
+  const result: IndependentCourse[] = [];
 
-    all.push({
-      id: this.uid(),
-      studentEmail: u.email,
-      courseId,
-      enrolledAt: Date.now(),
-    });
-
-    this.saveEnrollments(all);
-    return { ok: true };
+  for (let i = 0; i < enrollments.length; i++) {
+    const courseId = enrollments[i].courseId;
+    const course = courses.find(c => c.id === courseId);
+    if (course) result.push(course);
   }
+
+  return result;
+}
+
+
+
+enroll(courseId: string) {
+  const u = this.auth.getCurrentUser();
+
+  if (!u || u.accountType !== 'independent' || u.role !== 'student') {
+    return { ok: false, message: 'Only independent students can enroll.' };
+  }
+
+  const course = this.getCourses().find(c => c.id === courseId && c.isActive);
+  if (!course) return { ok: false, message: 'Course not found.' };
+
+  const all = this.getEnrollments();
+
+  // prevent duplicates
+  const exists = all.some(e => e.studentEmail === u.email && e.courseId === courseId);
+  if (exists) return { ok: false, message: 'Already enrolled.' };
+
+  all.push({
+    id: this.uid(),
+    studentEmail: u.email,   // ✅ HERE
+    courseId: courseId,      // ✅ HERE
+    enrolledAt: Date.now(),
+  });
+
+  this.saveEnrollments(all);
+  return { ok: true };
+}
+
+
+  
 
   getMyEnrollments(): IndependentEnrollment[] {
     const u = this.auth.getCurrentUser();

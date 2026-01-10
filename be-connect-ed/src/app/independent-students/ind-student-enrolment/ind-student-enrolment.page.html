@@ -1,7 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <img routerLink="/ind-student-home" src="assets/images/logo.png" class="logo" />
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+
+
+<h2 class="page-title">My Enrolled Courses</h2>
+
+<div class="page-padding">
+  <div *ngIf="enrolledCourses.length === 0" class="empty-state">
+    <p>You are not enrolled in any courses yet.</p>
+  </div>
+
+  <ion-card class="course-card" *ngFor="let c of enrolledCourses">
+    <ion-card-header>
+      
+      <ion-card-subtitle class="course-desc">{{ c.description }}</ion-card-subtitle>
+      <ion-card-title class="course-title">{{ c.title }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="units-box">
+        <ul>
+          <li *ngFor="let id of c.unitIds">{{ getUnitName(id) }}</li>
+        </ul>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</div>

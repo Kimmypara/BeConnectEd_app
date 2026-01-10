@@ -1,0 +1,38 @@
+.course-card {
+  --background: var(--ion-color-primary-contrast);
+  background: var(--ion-color-primary-contrast);
+  border-radius: 18px;
+  box-shadow: 4px 0px 4px rgba(4, 4, 4, 0.18);
+}
+
+.course-header {
+  padding-bottom: 6px;
+}
+
+.course-title {
+  color: var(--ion-color-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.course-subtitle {
+  color: var(--ion-color-primary);
+  opacity: 0.8;
+  white-space: normal;       /* allow wrapping */
+  margin-top: 6px;
+}
+
+/* Units area scrolls instead of growing forever */
+.units-box {
+  max-height: 120px;         /* change height you want */
+  overflow-y: auto;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.units-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ion-color-primary);
+}
