@@ -1,7 +1,7 @@
 
  <div><h2 class="page-title">Available Courses</h2></div>
 
- <ion-content class="page-content">
+ <div class="page-padding">
   <ion-card class="course-card" *ngFor="let c of courses">
     <ion-card-header>
       <ion-card-subtitle class="course-desc">{{ c.description }}</ion-card-subtitle>
@@ -16,10 +16,10 @@
         </ul>
       </div>
 
-      <ion-button expand="block" class="enroll-btn" (click)="enroll(c.id)">
+      <ion-button expand="block" class="enroll-btn" (click)="enroll(c.courseCode)">
         Enroll
       </ion-button>
     </ion-card-content>
   </ion-card>
 
-</ion-content>
+</div>>

@@ -34,28 +34,23 @@
     <div class="ion-page" id="main-content">
 
    <ion-header>
-  <ion-toolbar class="toolbar-with-logo">
+  <ion-toolbar  class="toolbar-with-logo">
+  <ion-buttons slot="start"   class="ion-text-center menu-btn">
+    <ion-menu-button menu="mainMenu"></ion-menu-button>
+  </ion-buttons>
 
-    <!-- left: menu icon -->
-    <ion-buttons slot="start">
-      <ion-menu-button menu="mainMenu"></ion-menu-button>
-    </ion-buttons>
-
-    <!-- center: logo -->
-    <ion-title class="logo-title">
-      <img src="assets/images/logo.png"  (click)="goHomeByRole()"
-    style="cursor:pointer;" class="toolbar-logo" alt="BeConnectEd logo" r />
-    </ion-title>
-
-    <!-- optional right spacer (keeps logo perfectly centered even if you add icons later) -->
-    <ion-buttons slot="end">
-      <div class="end-spacer"></div>
-    </ion-buttons>
-
-  </ion-toolbar>
+  <ion-title class="logo-title">
+    <img
+      src="assets/images/logo.png"
+      class="toolbar-logo" 
+      alt="BeConnectEd logo"
+      (click)="goHomeByRole()"
+    />
+  </ion-title>
+</ion-toolbar>
 </ion-header>
 
-      <!-- MAIN ROUTER OUTLET (ALWAYS PRESENT) -->
+      <!-- MAIN ROUTER OUTLET -->
       <ion-content class="ion-padding">
         <ion-router-outlet></ion-router-outlet>
       </ion-content>

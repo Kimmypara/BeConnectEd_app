@@ -1,25 +1,68 @@
-
-
-<h2 class="page-title">My Enrolled Courses</h2>
+<h2 class="page-title">Enrolment</h2>
 
 <div class="page-padding">
   <div *ngIf="enrolledCourses.length === 0" class="empty-state">
     <p>You are not enrolled in any courses yet.</p>
   </div>
 
-  <ion-card class="course-card" *ngFor="let c of enrolledCourses">
-    <ion-card-header>
-      
-      <ion-card-subtitle class="course-desc">{{ c.description }}</ion-card-subtitle>
-      <ion-card-title class="course-title">{{ c.title }}</ion-card-title>
-    </ion-card-header>
+  <div *ngFor="let c of enrolledCourses" class="enrol-panel">
+    <!-- COURSE HEADER ROW -->
+    <div class="row course-top">
+      <div><h3>Course</h3></div>
+</div>
+    <div class="row">
+ <!-- COURSE NAME -->
+      <div class="label">Course Name: </div>
+      <div class="value ">{{ c.title }}</div>
+  </div>
+       <!-- COURSE CODE -->
+        <div class="row">
+      <div class="label">Course Code</div>
+      <div class="value ">{{ c.courseCode }}</div>
+    </div>
 
-    <ion-card-content>
-      <div class="units-box">
-        <ul>
-          <li *ngFor="let id of c.unitIds">{{ getUnitName(id) }}</li>
-        </ul>
+    <!-- COURSE DESCRIPTION -->
+    <div class="row ">
+      <div class="label">Course Description</div>
+      <div class="value ">{{ c.description || '-' }}</div>
+    </div>
+
+     <div class="row course-top">
+      <div><h3>Units</h3></div>
+</div>
+
+    <!-- UNITS LIST -->
+    <div class="units-scroll">
+      <div class="unit-block" *ngFor="let id of c.unitIds">
+       
+         
+        <div class="row">
+          <div class="label">Unit Name</div>
+        </div>
+          <!-- UNIT NAME -->
+        <div class="row">
+          <div class="value line">{{ getUnitName(id) }}</div>
+        </div>
+ 
+         <div class="row">
+          <div class="label">Unit Code</div>
+        </div>
+<!-- UNIT CODE -->
+        <div class="row">
+          <div class="value line">{{ getUnitCode(id) }}</div>
+        </div>
+
+        <div class="row">
+          <div class="label">Lecturer</div>
+        </div>
+
+        <div class="row">
+          <!-- at the moment it is getting email of teacher who created the course -->
+          <div class="value line">{{ c.createdByEmail }}</div>
+        </div>
+
+        <div class="divider"></div>
       </div>
-    </ion-card-content>
-  </ion-card>
+    </div>
+  </div>
 </div>

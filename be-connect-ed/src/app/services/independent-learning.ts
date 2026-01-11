@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AuthService, AppUser } from './auth';
-import { Unit } from './courses'; // <- from your CoursesService file
+import { Unit } from './courses'; 
 
 export interface IndependentCourse {
   id: string;                 // unique id
   title: string;
+  courseCode: string;
   description?: string;
-  createdByEmail: string;     // independent teacher email
-  unitIds: number[];          // uses Unit.unit_id
+  createdByEmail: string;     
+  unitIds: number[];          
   isActive: boolean;
   createdAt: number;
 }
@@ -55,7 +56,9 @@ export class IndependentLearning {
   // =========================
   // TEACHER: create course + assign units
   // =========================
-  createCourse(input: { title: string; description?: string; unitIds: number[] }) {
+  createCourse(input: {
+    courseCode: any; title: string; description?: string; unitIds: number[] 
+}) {
     const u = this.auth.getCurrentUser();
     if (!u || u.accountType !== 'independent' || u.role !== 'teacher') {
       return { ok: false, message: 'Only independent teachers can create courses.' };
@@ -64,6 +67,7 @@ export class IndependentLearning {
     const course: IndependentCourse = {
       id: this.uid(),
       title: input.title.trim(),
+      courseCode: input.courseCode.trim(),
       description: input.description?.trim() ?? '',
       createdByEmail: u.email,
       unitIds: input.unitIds ?? [],

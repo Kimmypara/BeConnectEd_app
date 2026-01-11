@@ -152,8 +152,9 @@ const routes: Routes = [
     loadChildren: () => import('./independent-students/ind-student-calendar/ind-student-calendar.module').then( m => m.IndStudentCalendarPageModule)
   },
  
-{ path: '**', redirectTo: 'auth/login' },
 
+
+{ path: '**', redirectTo: 'auth/login' },
 
 ];
 

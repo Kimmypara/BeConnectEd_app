@@ -1,22 +1,51 @@
-.logo-title {
-display: flex;
-  justify-content: center;
-  align-items: center;
 
+
+ion-toolbar.toolbar-with-logo {
+  --min-height: 120px;
+  position: relative;
 }
 
-.toolbar-with-logo {
-  --min-height: 120px;   /* default Ionic toolbar height */
-  width: auto;
-  display: block;
-
+/* menu button */
+.menu-btn {
+  position: relative;
+  z-index: 10;
+  color: var(--ion-color-primary) !important;
 }
 
+/* logo */
 .toolbar-logo {
   max-height: 50px;
+  width: auto;
   object-fit: contain;
+  cursor: pointer;
 }
 
+/* iOS */
+.ios ion-title.logo-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Android/Web (md) */
+.md ion-toolbar.toolbar-with-logo ion-title.logo-title {
+  position: absolute;
+  inset: 0;
+  text-align: center !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+left: 50%;
+  transform: translateX(-50%);
+}
+
+.md ion-toolbar.toolbar-with-logo ion-title.logo-title .toolbar-logo {
+  pointer-events: auto;
+  
+}
+
+/* ===== Menu styling ===== */
 
 ion-menu::part(backdrop) {
   background-color: transparent;
@@ -24,44 +53,30 @@ ion-menu::part(backdrop) {
 
 ion-menu::part(container) {
   border-radius: 0 20px 20px 0;
- --background: #dcf1f8 ;
+  --background: var(--ion-color-primary-contrast) !important;
   box-shadow: 4px 0px 4px rgba(4, 4, 4, 0.18);
-  
 }
 
 .custom-menu-header {
-  --background: #dcf1f8 !important;
-  color: #172c42 !important;
+  --background: var(--ion-color-primary-contrast) !important;
+  color: var(--ion-color-primary) !important;
   font-weight: 600;
 }
 
 .custom-menu-list {
-  background: #dcf1f8 !important;
+  --background: var(--ion-color-primary-contrast) !important;
 }
 
-ion-item {
-    --background: #d8eef7 !important;
-    color: #172c42 !important;
-    border-bottom: 1px solid #c0dce8 !important; 
-
-     &.item-selected,
-    &:active {
-      --color:#943da8c3 ;
-    }
+ion-menu ion-item {
+  --background: var(--ion-color-primary-contrast) !important;
+  --color: var(--ion-color-primary) !important;
+  border-bottom: 1px solid #c0dce8 !important;
 }
 
-.menu{
-     z-index: 4;
-     margin-top:2rem  ; 
-     margin-left: 2rem;
-     color: #172c42;
-     width:3rem ;
-     padding: 0%;
-     
+ion-menu ion-item.ion-activated,
+ion-menu ion-item.ion-selected {
+  --color: var(--ion-color-tertiary) !important;
 }
-
-
-
 
 
 

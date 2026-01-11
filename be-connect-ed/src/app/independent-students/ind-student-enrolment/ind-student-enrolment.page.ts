@@ -30,6 +30,14 @@ export class IndStudentEnrolmentPage implements OnInit {
 
   getUnitName(id: number): string {
     const u = this.units.find(x => x.unit_id === id);
-    return u ? `${u.unit_code} - ${u.unit_name}` : 'Unknown unit';
+    return u ? ` ${u.unit_name}` : 'Unknown unit';
   }
+
+
+
+getUnitCode(id: number): string {
+  const u = this.units.find(x => x.unit_id === id);
+  return u ? u.unit_code : '-';
+}
+
 }

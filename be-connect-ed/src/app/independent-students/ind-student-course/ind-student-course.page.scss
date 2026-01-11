@@ -1,32 +1,32 @@
-.page-content{
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --padding-bottom: 90px;
-  height: 70vh;
-  
-}
 
 .page-title{
-position: fixed;
- left: 50%;
+  position: fixed;
+  left: 50%;
   transform: translateX(-50%);
   color: var(--ion-color-primary);
   font-weight: 600;
-  margin:auto;
   font-size: 1.2rem;
+  z-index: 50;
+  width: calc(100% - 32px);
+  text-align: center;
+  pointer-events: none;
+  margin-top: 0rem;
+margin-bottom: 2rem;
 }
 
+.page-padding{
+  margin-top: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 3rem;
+}
 
-
-
-/* ✅ Real card look */
-.course-card{
-    width: 90%;
-    margin: 2rem auto;
-  border-radius: 20px;
-  overflow: hidden;
+.course-card {
+  --background: var(--ion-color-primary-contrast);
   background: var(--ion-color-primary-contrast);
+  border-radius: 18px;
   box-shadow: 4px 0px 4px rgba(4, 4, 4, 0.18);
+
 }
 
 ion-content {
@@ -49,9 +49,8 @@ ion-content {
 
 /* ✅ Units area scrolls, card does NOT grow */
 .units-box{
-  max-height: 140px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  height: auto;
+  
   padding: 10px 12px;
   border-radius: 12px;
   background: rgba(255,255,255,0.35);
@@ -67,5 +66,6 @@ ion-content {
 
 .enroll-btn{
   height: 44px;
+  
 }
 

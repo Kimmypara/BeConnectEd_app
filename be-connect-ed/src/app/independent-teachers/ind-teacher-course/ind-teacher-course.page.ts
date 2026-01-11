@@ -15,6 +15,7 @@ export class IndTeacherCoursePage implements OnInit {
   selectedUnitIds: number[] = [];
 
   title = '';
+  courseCode = '';
   description = '';
 
 unitsSelectOpts = { cssClass: 'units-select-alert' };
@@ -87,6 +88,7 @@ get unitsSelectedText(): string {
 
 
    create() {
+     
     const cleanTitle = (this.title || '').trim();
     const cleanDesc = (this.description || '').trim();
     const hasUnits = this.selectedUnitIds && this.selectedUnitIds.length > 0;
@@ -111,7 +113,9 @@ get unitsSelectedText(): string {
 
     // create
     const res = this.ind.createCourse({
+
       title: cleanTitle,
+      courseCode: this.courseCode,
       description: cleanDesc,
       unitIds: this.selectedUnitIds,
     });
@@ -123,6 +127,7 @@ get unitsSelectedText(): string {
 
     alert('Course created ✅');
     this.title = '';
+    this.courseCode = '';
     this.description = '';
     this.selectedUnitIds = [];
   }
