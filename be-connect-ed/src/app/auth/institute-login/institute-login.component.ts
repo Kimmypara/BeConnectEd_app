@@ -61,9 +61,9 @@ export class InstituteLoginComponent {
   if (role === 'teacher') {
     this.router.navigate(['/teacher-home']);
   } 
-  //else if (role === 'parent') {
-   // this.router.navigate(['/parent-home']); // for later
-  //}
+  else if (role === 'parent') {
+   this.router.navigate(['/student/home']); // temporary login in student page
+  }
    else {
     // student (default)
     this.router.navigate(['/student/home']);

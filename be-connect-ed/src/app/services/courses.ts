@@ -1,3 +1,4 @@
+// courses.service.ts
 import { Injectable } from '@angular/core';
 
 export interface Course {
@@ -6,7 +7,7 @@ export interface Course {
   course_description: string;
   course_name: string;
   course_duration: string;
-  is_active: boolean; 
+  is_active: boolean;
   MQF_Level: number;
   course_credits: number;
 }
@@ -22,23 +23,117 @@ export interface Unit {
 }
 
 export interface IndependentCourse {
-  id: number;
+  id: number;               
   title: string;
   description: string;
   unitIds: number[];
   createdByEmail: string;
+  createdAt: number;
+  updatedAt: number;
 }
-
 
 @Injectable({ providedIn: 'root' })
 export class CoursesService {
   public courseList: Course[] = [];
   public unitList: Unit[] = [];
 
+  // LocalStorage key for independent teacher courses
+  private IND_COURSES_KEY = 'independentCourses';
+
   constructor() {
     this.populateCourseList();
     this.populateUnitList();
   }
+
+ 
+
+  private readIndependentCourses(): IndependentCourse[] {
+    const raw = localStorage.getItem(this.IND_COURSES_KEY);
+    return raw ? (JSON.parse(raw) as IndependentCourse[]) : [];
+  }
+
+  private writeIndependentCourses(list: IndependentCourse[]): void {
+    localStorage.setItem(this.IND_COURSES_KEY, JSON.stringify(list));
+  }
+
+  /** List courses created by this teacher (by email) */
+  getIndependentCoursesByTeacher(email: string): IndependentCourse[] {
+    if (!email) return [];
+    return this.readIndependentCourses().filter(c => c.createdByEmail === email);
+  }
+
+  /** Get single course, only if owner matches */
+  getIndependentCourseById(id: number, teacherEmail: string): IndependentCourse | null {
+    const course = this.readIndependentCourses().find(c => c.id === id) ?? null;
+    if (!course) return null;
+    return course.createdByEmail === teacherEmail ? course : null;
+  }
+
+  /** Create new course  */
+  addIndependentCourse(
+    input: Omit<IndependentCourse, 'id' | 'createdAt' | 'updatedAt'>
+  ): IndependentCourse {
+    const all = this.readIndependentCourses();
+
+    const nextId = all.length ? Math.max(...all.map(c => c.id)) + 1 : 1;
+    const now = Date.now();
+
+    const newCourse: IndependentCourse = {
+      ...input,
+      id: nextId,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    all.unshift(newCourse);
+    this.writeIndependentCourses(all);
+    return newCourse;
+  }
+
+  /** Update course only if owner matches */
+  updateIndependentCourse(
+    id: number,
+    teacherEmail: string,
+    patch: Partial<IndependentCourse>
+  ): IndependentCourse {
+    const all = this.readIndependentCourses();
+    const idx = all.findIndex(c => c.id === id);
+    if (idx < 0) throw new Error('Course not found');
+
+    const existing = all[idx];
+    if (existing.createdByEmail !== teacherEmail) throw new Error('Not allowed');
+
+    const updated: IndependentCourse = {
+      ...existing,
+      ...patch,
+      id: existing.id,
+      createdByEmail: existing.createdByEmail,
+      createdAt: existing.createdAt,
+      updatedAt: Date.now(),
+    };
+
+    all[idx] = updated;
+    this.writeIndependentCourses(all);
+    return updated;
+  }
+
+  /** Delete course only if owner matches */
+  deleteIndependentCourse(id: number, teacherEmail: string): void {
+    const all = this.readIndependentCourses();
+    const existing = all.find(c => c.id === id);
+    if (!existing) return;
+
+    if (existing.createdByEmail !== teacherEmail) throw new Error('Not allowed');
+
+    this.writeIndependentCourses(all.filter(c => c.id !== id));
+  }
+
+  
+  getUnitName(unitId: number): string {
+    return this.unitList.find(u => u.unit_id === unitId)?.unit_name ?? `Unit ${unitId}`;
+  }
+
+ /*list of courses*/
 
   populateCourseList() {
     this.courseList = [
@@ -53,7 +148,7 @@ export class CoursesService {
         MQF_Level: 4,
         course_credits: 120,
       },
-            {
+      {
         course_id: 2,
         course_code: ' CA4-W05-24',
         course_description:
@@ -64,7 +159,7 @@ export class CoursesService {
         MQF_Level: 4,
         course_credits: 120,
       },
-            {
+      {
         course_id: 3,
         course_code: ' CA4-A02-23',
         course_description:
@@ -75,7 +170,7 @@ export class CoursesService {
         MQF_Level: 4,
         course_credits: 120,
       },
-        {
+      {
         course_id: 4,
         course_code: ' CA4-A01-23',
         course_description:
@@ -86,83 +181,92 @@ export class CoursesService {
         MQF_Level: 4,
         course_credits: 120,
       },
-    ];  
+    ];
   }
 
- populateUnitList() {
+  /*list of units*/
+  populateUnitList() {
     this.unitList = [
       {
-  unit_id:1,
-  unit_code: 'CAGDN-406-1701',
-  unit_name: ' Contextual Studies in Graphic Design',
-  unit_description: 'Graphic Design reflects, translates and communicates social, political and cultural issues ecology, environment, politics, war, health, education and welfare – visually.In understanding this, the learner is encouraged to interpret, develop and nurture own ideas and communicate observations in contemporary language, which informs and defines own specialist area of interest in design learning towards integration within the creative industry. ',
-  is_active: true,
-  unit_duration: '150 hours',
-  ects_credits: 6,
-  },
-   {
-  unit_id:2,
-  unit_code: 'CAART-406-1625',
-  unit_name: ' Exploring Digital Media',
-  unit_description: 'This is a practical skill based unit where students will demonstrate an understanding of digital media applications in a creative context. Learners will demonstrate the ability to use required tools and techniques for digital imaging. Learners should show proficient uses of graphic design software and demonstrate this through a portfolio of work. ',
-  is_active: true,
-  unit_duration: '150 hours',
-  ects_credits: 6,
-  },
-   {
-  unit_id:3,
-  unit_code: 'CAMED-406-1607',
-  unit_name: 'Interactive Media Fundamentals',
-  unit_description: 'With the ever-increasing demand for social connectivity, interactive media products have become commonplace as a communication tool between the businesses and the individual. The increase in popularity within this field has shifted the designer’s role into bringing fitness for purpose and usability to the forefront of interactive product development. For this reason, practitioners must have a fundamental understanding of the design principles required to produce effective interactive media products. This unit provides a practical basis for learners to study the role and use of interactive media products within the industry, and should stipulate a basis for future career opportunities in interactive product creation. ',
-  is_active: true,
-  unit_duration: '150 hours',
-  ects_credits: 6,
-  },
-   {
-  unit_id:4,
-  unit_code: 'CAFOT-406-1601',
-  unit_name: 'Photographic Media, Techniques and Technology',
-  unit_description: 'The aim of this unit is to develop knowledge, understanding and skills across the range of processes involved in different photographic media, techniques and technology which contribute to the creative photographic process. At the end of the unit, learners will be able to use this knowledge in the creation of their own photographic images. Through experimentation and learning over a long period of time, a range of skills and techniques have been developed which professional photographers employ and adapt to their own uses. In many cases, a photographer’s choice of materials and techniques can create a unique “look” which can become identified with a particular photographer. In the past such identities have made some photographers internationally famous. Some processes involve working with potentially harmful equipment which have health and safety implications. Therefore, learners must be made aware of these implications so that they can work safely without exposing themselves and others to harm. Digital technologies have largely replaced the use of film in photography.',
-  is_active: true,
-  unit_duration: '150 hours',
-  ects_credits: 6,
-  },
-   {
-  unit_id:5,
-  unit_code: 'CAART-406-1611',
-  unit_name: 'Principles of Design',
-  unit_description: 'This unit aims to build the necessary skills and knowledge required by learners to investigate and comprehend Graphic Design practice and the social, historical and cultural events, theories and debates, with contextual reference and relevance to contemporary developments. Learners will use the knowledge and understanding of historical and contemporary Graphic Design gained in this unit to further inform and develop their practice within their specialist field of study and in the wider context of professional practice. ',
-  is_active: true,
-  unit_duration: '150 hours',
-  ects_credits: 6,
-  },
-   {
-  unit_id:6,
-  unit_code: 'CAART-406-1622',
-  unit_name: 'Visual Communication',
-  unit_description: 'This unit introduces a number of design methods and techniques. And aims further, for students to develop skills in communicating ideas visually and succeed an ability of a design practitioner to effectively communicate a message. Different contexts require different means of communication, varying from artistic impressions to commercial persuasion. This unit will therefore introduce learners to a variety of visual communication tools and techniques, to prepare them for more specialized subjects. Students will learn to appropriately apply traditional and digital techniques, whilst encouraged to experiment and develop own ways and styles to convey information ',
-  is_active: true,
-  unit_duration: '150 hours',
-  ects_credits: 6,
-  },
-   {
-  unit_id:7,
-  unit_code: 'CDKSK-402-2324',
-  unit_name: 'Community Social Responsibility',
-  unit_description: 'This unit focuses on Community Social Responsibility and provides an opportunity for learners to better understand themselves and others to establish life goals. Community social responsibility enables learners to understand their strengths, areas for improvement, opportunities offered to them during their lifespan and threats which can hinder their achievements. This unit will prepare students for life, employment and how to become active citizens in society. ',
-  is_active: true,
-  unit_duration: '50 hours',
-  ects_credits: 2,
-  },
-  {
-  unit_id:8,
-  unit_code: 'CDKSK-406-2319',
-  unit_name: 'English',
-  unit_description: 'This unit typically refers to English language skills needed for specific careers or vocational training programmes. The main objective of this unit is to prepare learners to understand and respond to spoken English on a variety of topics, including abstract or unfamiliar topics, to read and comprehend a variety of texts, including more extended and more complex texts, and to write in a more precise and structured way. Particular focus is given to summarising and paraphrasing.',
-  is_active: true,
-  unit_duration: '150 hours',
-  ects_credits: 6,
-  },
+        unit_id: 1,
+        unit_code: 'CAGDN-406-1701',
+        unit_name: 'Contextual Studies in Graphic Design',
+        unit_description:
+          'Graphic Design reflects, translates and communicates social, political and cultural issues ecology, environment, politics, war, health, education and welfare – visually.In understanding this, the learner is encouraged to interpret, develop and nurture own ideas and communicate observations in contemporary language, which informs and defines own specialist area of interest in design learning towards integration within the creative industry.',
+        is_active: true,
+        unit_duration: '150 hours',
+        ects_credits: 6,
+      },
+      {
+        unit_id: 2,
+        unit_code: 'CAART-406-1625',
+        unit_name: 'Exploring Digital Media',
+        unit_description:
+          'This is a practical skill based unit where students will demonstrate an understanding of digital media applications in a creative context. Learners will demonstrate the ability to use required tools and techniques for digital imaging. Learners should show proficient uses of graphic design software and demonstrate this through a portfolio of work.',
+        is_active: true,
+        unit_duration: '150 hours',
+        ects_credits: 6,
+      },
+      {
+        unit_id: 3,
+        unit_code: 'CAMED-406-1607',
+        unit_name: 'Interactive Media Fundamentals',
+        unit_description:
+          'With the ever-increasing demand for social connectivity, interactive media products have become commonplace as a communication tool between the businesses and the individual. The increase in popularity within this field has shifted the designer’s role into bringing fitness for purpose and usability to the forefront of interactive product development. For this reason, practitioners must have a fundamental understanding of the design principles required to produce effective interactive media products. This unit provides a practical basis for learners to study the role and use of interactive media products within the industry, and should stipulate a basis for future career opportunities in interactive product creation.',
+        is_active: true,
+        unit_duration: '150 hours',
+        ects_credits: 6,
+      },
+      {
+        unit_id: 4,
+        unit_code: 'CAFOT-406-1601',
+        unit_name: 'Photographic Media, Techniques and Technology',
+        unit_description:
+          'The aim of this unit is to develop knowledge, understanding and skills across the range of processes involved in different photographic media, techniques and technology which contribute to the creative photographic process. At the end of the unit, learners will be able to use this knowledge in the creation of their own photographic images.',
+        is_active: true,
+        unit_duration: '150 hours',
+        ects_credits: 6,
+      },
+      {
+        unit_id: 5,
+        unit_code: 'CAART-406-1611',
+        unit_name: 'Principles of Design',
+        unit_description:
+          'This unit aims to build the necessary skills and knowledge required by learners to investigate and comprehend Graphic Design practice and the social, historical and cultural events, theories and debates, with contextual reference and relevance to contemporary developments.',
+        is_active: true,
+        unit_duration: '150 hours',
+        ects_credits: 6,
+      },
+      {
+        unit_id: 6,
+        unit_code: 'CAART-406-1622',
+        unit_name: 'Visual Communication',
+        unit_description:
+          'This unit introduces a number of design methods and techniques. And aims further, for students to develop skills in communicating ideas visually and succeed an ability of a design practitioner to effectively communicate a message.',
+        is_active: true,
+        unit_duration: '150 hours',
+        ects_credits: 6,
+      },
+      {
+        unit_id: 7,
+        unit_code: 'CDKSK-402-2324',
+        unit_name: 'Community Social Responsibility',
+        unit_description:
+          'This unit focuses on Community Social Responsibility and provides an opportunity for learners to better understand themselves and others to establish life goals.',
+        is_active: true,
+        unit_duration: '50 hours',
+        ects_credits: 2,
+      },
+      {
+        unit_id: 8,
+        unit_code: 'CDKSK-406-2319',
+        unit_name: 'English',
+        unit_description:
+          'This unit typically refers to English language skills needed for specific careers or vocational training programmes.',
+        is_active: true,
+        unit_duration: '150 hours',
+        ects_credits: 6,
+      },
     ];
   }
 }

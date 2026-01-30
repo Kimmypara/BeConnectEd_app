@@ -1,8 +1,8 @@
 
 .course-card {
   width: 90%;
-  margin: 0 auto 1rem auto;   
-  height: auto;
+  margin: 0 auto 6rem auto;   /* space above bottom nav */
+  height: 70vh;
   border-radius: 20px;
   background: var(--ion-color-primary-contrast);
   box-shadow: 4px 0px 4px rgba(4, 4, 4, 0.18);
@@ -11,45 +11,6 @@
   overflow: hidden;
 }
 
-.page-padding{
-  margin-top: 2rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin-bottom: 3rem;
-}
-
-.page-title{
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--ion-color-primary);
-  font-weight: 600;
-  font-size: 1.2rem;
-  z-index: 50;
-  width: calc(100% - 32px);
-  text-align: center;
-  pointer-events: none;
-  margin-top: 0rem;
-margin-bottom: 2rem;
-}
-
-
-
-.page-title2{
- text-align: center;
- color: var(--ion-color-primary);
- font-weight: 500;
- font-size: 1.2rem;
-}
-
-.course-title{
-  color: var(--ion-color-primary);
-  font-weight: 500;
-}
-
-.course-desc{
-  color: var(--ion-color-primary);
-}
 
 .form-title {
   color: var(--ion-color-primary);
@@ -59,32 +20,6 @@ margin-bottom: 2rem;
   margin: 12px 0;
 }
 
-.plus{
-  font-size: 2rem;
-  z-index: 999;
-}
-
-
-.add-fab {
-  bottom: 80px; 
-  right: 16px;
-}
-
-ion-card-header {
-  display: flex;
-  flex-direction: column;
-}
-
-ion-card-title {
-  order: 1;
-}
-
-ion-card-subtitle {
-  order: 2;
-  text-transform: none;  // ✅ stop ALL CAPS on iOS
-  letter-spacing: normal;
-  white-space: normal;
-}
 
 .form-scroll {
   flex: 1;

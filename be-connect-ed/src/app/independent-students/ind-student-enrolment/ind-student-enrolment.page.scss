@@ -60,6 +60,21 @@ margin-bottom: 2rem;
   overflow-x: hidden;
 }
 
+ion-card-header {
+  display: flex;
+  flex-direction: column;
+}
+
+ion-card-title {
+  order: 1;
+}
+
+ion-card-subtitle {
+  order: 2;
+  text-transform: none;  //  stop ALL CAPS on iOS
+  letter-spacing: normal;
+  white-space: normal;
+}
 
 
 

@@ -10,10 +10,10 @@ import { IndTeacherCoursePage } from './ind-teacher-course.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,     // ✅ needed for [(ngModel)]
+    FormsModule,     
     IonicModule,
     IndTeacherCoursePageRoutingModule
   ],
-  declarations: [IndTeacherCoursePage]
+  
 })
 export class IndTeacherCoursePageModule {}

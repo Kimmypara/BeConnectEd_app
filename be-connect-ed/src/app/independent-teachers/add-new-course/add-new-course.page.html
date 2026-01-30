@@ -1,0 +1,53 @@
+
+
+<div class="course-card">
+  <h2 class="form-title">New Course</h2>
+
+  <div class="form-scroll">
+    <ion-list class="form">
+      <ion-item>
+        <ion-input class="input" label="Title" [(ngModel)]="title"></ion-input>
+      </ion-item>
+
+       <ion-item>
+      <ion-input class="input" label="Course Code" [(ngModel)]="courseCode"></ion-input>
+</ion-item>
+
+      <ion-item>
+        <ion-textarea class="input" label="Description" [(ngModel)]="description" rows="6"></ion-textarea>
+      </ion-item>
+
+
+    <ion-item>
+  <ion-select
+    class="input"
+    label="Units"
+    labelPlacement="stacked"
+    interface="alert"
+    [interfaceOptions]="unitsSelectOpts"
+    [multiple]="true"
+    [(ngModel)]="selectedUnitIds"
+    (ionChange)="onUnitsChange($event)"
+    [selectedText]="selectedUnits.length ? (selectedUnits.length + ' units selected') : ''"
+    placeholder="Select units"
+    name="units"
+  >
+    <ion-select-option *ngFor="let u of units" [value]="u.unit_id">
+      {{ u.unit_code }} - {{ u.unit_name }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>
+
+
+
+<div class="selected-units-box role-select" interface="alert" *ngIf="selectedUnits.length > 0"> <ul class="units-list"> <li *ngFor="let u of selectedUnits"> {{ u.unit_code }} - {{ u.unit_name }} </li> </ul> </div> </ion-list> </div>
+
+
+  <div class="actions">
+    <ion-button expand="block" class="btn-create" (click)="save()">
+      Create Course
+    </ion-button>
+  </div>
+
+<ion-icon aria-hidden="true" md="add-circle-outline" ios="add-circle-sharp"></ion-icon>
+

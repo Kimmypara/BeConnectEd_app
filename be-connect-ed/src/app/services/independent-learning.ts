@@ -3,7 +3,7 @@ import { AuthService, AppUser } from './auth';
 import { Unit } from './courses'; 
 
 export interface IndependentCourse {
-  id: string;                 // unique id
+  id: string;                 
   title: string;
   courseCode: string;
   description?: string;
@@ -22,9 +22,7 @@ export interface IndependentEnrollment {
 
 @Injectable({ providedIn: 'root' })
 export class IndependentLearning {
-  find(courseId: string) {
-    throw new Error('Method not implemented.');
-  }
+
   private COURSES_KEY = 'independentCourses';
   private ENROLL_KEY = 'independentEnrollments';
 
@@ -53,9 +51,43 @@ export class IndependentLearning {
     localStorage.setItem(this.ENROLL_KEY, JSON.stringify(items));
   }
 
-  // =========================
-  // TEACHER: create course + assign units
-  // =========================
+// Get a single course by id 
+findCourseById(courseId: string): IndependentCourse | null {
+  return this.getCourses().find(c => c.id === courseId) ?? null;
+}
+
+// Update a course
+updateCourse(courseId: string, patch: Partial<IndependentCourse>) {
+  const u = this.auth.getCurrentUser();
+  if (!u) return { ok: false, message: 'Not logged in.' };
+
+  const all = this.getCourses();
+  const idx = all.findIndex(c => c.id === courseId);
+  if (idx < 0) return { ok: false, message: 'Course not found.' };
+
+  const existing = all[idx];
+  if (existing.createdByEmail !== u.email) {
+    return { ok: false, message: 'Not your course.' };
+  }
+
+  const updated: IndependentCourse = {
+    ...existing,
+    ...patch,
+    id: existing.id,
+    createdByEmail: existing.createdByEmail,
+    createdAt: existing.createdAt,
+  };
+
+  all[idx] = updated;
+  this.saveCourses(all);
+  return { ok: true, course: updated };
+}
+
+
+
+  
+  // ind TEACHER  create course + assign units
+  
   createCourse(input: {
     courseCode: any; title: string; description?: string; unitIds: number[] 
 }) {
@@ -100,9 +132,11 @@ export class IndependentLearning {
     return { ok: true };
   }
 
-  // =========================
-  // STUDENT: see courses + enroll
-  // =========================
+  
+
+  
+  // STUDENT see courses + enroll
+ 
   getAvailableCourses(): IndependentCourse[] {
     return this.getCourses().filter(c => c.isActive);
   }
@@ -115,7 +149,7 @@ export class IndependentLearning {
 getMyEnrolledCourses(): IndependentCourse[] {
   const u = this.auth.getCurrentUser();
 
-  // ✅ must be logged in as independent student
+  //  must be logged in as independent student
   if (!u || u.accountType !== 'independent' || u.role !== 'student') return [];
 
   const enrollments = this.getEnrollments().filter(e => e.studentEmail === u.email);
@@ -152,8 +186,8 @@ enroll(courseId: string) {
 
   all.push({
     id: this.uid(),
-    studentEmail: u.email,   // ✅ HERE
-    courseId: courseId,      // ✅ HERE
+    studentEmail: u.email,   
+    courseId: courseId,      
     enrolledAt: Date.now(),
   });
 

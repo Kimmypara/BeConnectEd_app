@@ -46,6 +46,7 @@ teacherMenu = [
   { title: 'Plan & Schedule', url: '/ind-student-calendar' },
   { title: 'Enrolment', url: '/ind-student-enrolment' },
   { title: 'Courses', url: '/ind-student-course' },
+  { title: 'My Units', url: '/ind-student-myunits' },
   { title: 'Notifications', url: '/ind-student-notifications' },
   { title: 'Chats', url: '/ind-student-chats' },
   { title: 'Profile', url: '/ind-student-profile' },
@@ -55,11 +56,11 @@ teacherMenu = [
   { title: 'Home', url: '/ind-teacher-home' },
   { title: 'Plan & Schedule', url: '/ind-teacher-calendar' },
   { title: 'Enrolment', url: '/ind-teacher-enrolment' },
-  { title: 'Courses', url: '/ind-teacher-course' },
+  { title: 'My Courses', url: '/ind-teacher-course' },
+  { title: 'Teaching Units', url: '/ind-teacher-unit' },
   { title: 'Notifications', url: '/ind-teacher-notifications' },
-  { title: 'Units', url: '/ind-teacher-unit' },
-  { title: 'Profile', url: '/ind-teacher-profile' },
   { title: 'Chats', url: '/ind-teacher-chats' },
+   { title: 'Profile', url: '/ind-teacher-profile' },
 ];
 
 constructor(private router: Router, private auth: AuthService) {

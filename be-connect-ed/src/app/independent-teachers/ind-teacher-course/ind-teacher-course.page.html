@@ -1,52 +1,34 @@
 
 
-<div class="course-card">
-  <h2 class="form-title">New Course</h2>
+<div><h2 class="page-title">Courses</h2></div>
 
-  <div class="form-scroll">
-    <ion-list class="form">
-      <ion-item>
-        <ion-input class="input" label="Title" [(ngModel)]="title"></ion-input>
-      </ion-item>
+<div class="page-padding">
+  <ion-card class="course-card" *ngFor="let c of courses">
+    <ion-card-header>
+      <ion-card-title class="course-title">{{ c.title }}</ion-card-title>
+      <ion-card-subtitle class="course-desc">{{ c.description }}</ion-card-subtitle>
+    </ion-card-header>
 
-       <ion-item>
-      <ion-input label="Course Code" [(ngModel)]="courseCode"></ion-input>
-</ion-item>
+    <ion-card-content>
+      <h2 class="page-title2">Units</h2>
+      <div class="units-box" *ngIf="c.unitIds?.length">
+        <ul class="units-list">
+          <li *ngFor="let id of c.unitIds">{{ getUnitName(id) }}</li>
+        </ul>
+      </div>
 
-      <ion-item>
-        <ion-textarea class="input" label="Description" [(ngModel)]="description" rows="6"></ion-textarea>
-      </ion-item>
-
-
-    <ion-item>
-  <ion-select
-    class="input"
-    label="Units"
-    labelPlacement="stacked"
-    interface="alert"
-    [interfaceOptions]="unitsSelectOpts"
-    [multiple]="true"
-    [(ngModel)]="selectedUnitIds"
-    (ionChange)="onUnitsChange($event)"
-    [selectedText]="selectedUnits.length ? (selectedUnits.length + ' units selected') : ''"
-    placeholder="Select units"
-    name="units"
-  >
-    <ion-select-option *ngFor="let u of units" [value]="u.unit_id">
-      {{ u.unit_code }} - {{ u.unit_name }}
-    </ion-select-option>
-  </ion-select>
-</ion-item>
+      <ion-button expand="block" class="edit-btn" (click)="edit(c)">
+        Edit/View
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</div>
 
 
-
-<div class="selected-units-box role-select" interface="alert" *ngIf="selectedUnits.length > 0"> <ul class="units-list"> <li *ngFor="let u of selectedUnits"> {{ u.unit_code }} - {{ u.unit_name }} </li> </ul> </div> </ion-list> </div>
-
-
-  <div class="actions">
-    <ion-button expand="block" class="btn-create" (click)="create()">
-      Create Course
-    </ion-button>
-  </div>
-
-
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" class="add-fab">
+  <ion-fab-button routerLink="/add-new-course">
+    <ion-icon
+   class="plus"  name="add" >
+</ion-icon>
+  </ion-fab-button>
+</ion-fab>
