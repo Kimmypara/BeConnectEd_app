@@ -104,6 +104,7 @@ After successful login:
 - /ind-student-calendar
 - /ind-student-enrolment
 - /ind-student-course
+- /ind-student-myunits
 - /ind-student-profile
 - /ind-student-chats
 - /ind-student-notifications
@@ -113,6 +114,7 @@ After successful login:
 * /ind-teacher-calendar
 * /ind-teacher-enrolment
 * /ind-teacher-course
+* /add-new-course
 * /ind-teacher-unit
 * /ind-teacher-profile
 * /ind-teacher-chats
@@ -178,6 +180,16 @@ A service was created to store static arrays for:
         * unit_duration: string;
         * ects_credits: number;      
 These will later connect to the database through API.
+
+### Course for an Independent Teacher
+* Independent teachers can create a new Course
+  Each course card shows:
+   * Title
+   * Description
+   * Units included in the course
+   * An Edit/View button
+* Independent teachers can edit an existing course
+* Independent teachers can view all courses that they created 
 
 ### Courses for Independent students
 * Independent students can see all the available courses created by independent teachers.
